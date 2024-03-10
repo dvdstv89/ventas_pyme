@@ -1,0 +1,32 @@
+se trabajara siempre de manera ONLINE
+
+si los datos no se pueden sincronizar o se corre peligro de perdidas de datos se trabajara OFFLINE
+los datos OFFLINE se escogeran
+se puede exportar los datos a escogidos
+importarlos sobre la bd central con un terminal ONLINE
+
+version 1
+los nomencladores en una primera version seran estaticos
+-moneda
+-empresa
+-complejo
+-permiso
+-forma_pago
+
+online obligatorio
+-token (token por defecto importado)
+-plan de venta
+-periodo abierto
+-tienda_forma_pago
+-conciliacion
+-tienda (crear-eliminar)
+
+puede ser off-line
+-parte de venta
+-tienda (abrir-cerrar-modificar)
+
+1-chequear conexion cada vez que se haga una operacion
+2-marcar en el local como sincronizado
+3-cambiar en ambos lugares el numero de la version
+
+
