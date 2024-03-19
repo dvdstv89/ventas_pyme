@@ -1,6 +1,4 @@
-﻿
-using FontAwesome.Sharp;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace MyUI.Component
@@ -9,7 +7,7 @@ namespace MyUI.Component
     {       
         public string text { get; set; }
         public Color textColor { get; set; }
-        public Color backColor { get; set; }
+        public Color backColor { get; set; }      
         public Font font { get; set; }    
         public Padding padding { get; set; }
         public Size size { get; set; }

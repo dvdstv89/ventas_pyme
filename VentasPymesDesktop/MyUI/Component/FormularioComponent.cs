@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace MyUI.Component
@@ -30,7 +25,7 @@ namespace MyUI.Component
             form.Text = text;           
             form.StartPosition = formStartPosition;
             form.FormBorderStyle = formBorderStyle;
-            form.ShowIcon = showIcon;  
+            form.ShowIcon = showIcon;           
         }
     }
 }

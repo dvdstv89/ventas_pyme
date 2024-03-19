@@ -1,53 +1,38 @@
-﻿using ExternalSystem.Fichero;
-using GlobalContracts.Message;
-using GlobalContracts.Model;
+﻿using ExternalSystem.Enum.Message;
+using ExternalSystem.Fichero;
 using MyUI.Service;
 using System;
 
 namespace ExternalSystem.Service
 {
-    public class FicheroService<Tipo> where Tipo: BaseDTO
+    public class FicheroService<Tipo>
     {
-        Tipo model;
-        public FicheroService(Tipo model)
-        {
-            this.model = model;
-        }
-       
-        public bool AbrirFichero()
+        public Tipo AbrirFichero()
         {
             try
             {
                 File fichero = new File();
-                if (fichero.ExisteFichero())
-                {
-                    model = (Tipo)fichero.LeerFichero();
-                    return true;
-                }
-                return false;
+                return fichero.ExisteFichero() ? (Tipo)fichero.LeerFichero() : default;               
             }
             catch (Exception ex)
             {
+                DialogService.EXCEPTION(ex.Message);
                 throw new Exception(ex.Message);
             }
         }
-        public void GuardarFichero()
+        public void GuardarFichero(Tipo model)
         {
             try
             {
                 File fichero = new File();
                 fichero.GuardarFichero(model);
-                DialogService.ShowDialog(SuccessMessage.FICHERO_GUARDADO);
+                DialogService.SUCCESS(TextMensajeExternalSystem.FICHERO_GUARDADO);
             }
             catch (Exception ex)
             {
+                DialogService.EXCEPTION(ex.Message);
                 throw new Exception(ex.Message);
             }
-        }
-
-        public Tipo GetTipo()
-        {
-            return model;
         }
     }
 }

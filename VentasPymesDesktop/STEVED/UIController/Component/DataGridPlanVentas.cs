@@ -1,5 +1,4 @@
-﻿using Database.Class;
-using ModelData;
+﻿using ModelData;
 using ModelData.Atributo;
 using ModelData.Model;
 using NucleoEV.Model;
@@ -69,9 +68,9 @@ namespace NucleoEV.UIController.Component
             foreach (PlanVentaMensual plan in planVentaMensual)
             {               
                 object[] objectsTotal = new object[3];
-                objectsTotal[0] = plan.fecha.Mes.Mes+ " - " + VariablesEntorno.ultimaFechaValida.Year;
-                objectsTotal[1] = plan.planDiario.getMoneyFormated();
-                objectsTotal[2] = plan.saldo.MoneyAccount;
+                //objectsTotal[0] = plan.fecha.Mes.Mes+ " - " + VariablesEntorno.ultimaFechaValida.Year;
+                //objectsTotal[1] = plan.planDiario.getMoneyFormated();
+                //objectsTotal[2] = plan.saldo.MoneyAccount;
                 dataTable.Rows.Add(objectsTotal);
             }            
         }
@@ -79,13 +78,13 @@ namespace NucleoEV.UIController.Component
         {           
             object[] objectsTotal = new object[3];
             objectsTotal[0] = "Total Año " + VariablesEntorno.ultimaFechaValida.Year;
-            decimal saldo = planVentaMensual.Sum(p=>p.saldo.MoneyAccount);
-            ModelData.Atributo.Atributo_Money atributo_Saldo = AtributoFactory.buildMoney(saldo);
-            decimal planDiarioPromedio = saldo / VariablesEntorno.annoAbierto.CantidadDias;
-            ModelData.Atributo.Atributo_Money atributo_PlanDiarioPromedio = AtributoFactory.buildMoney(planDiarioPromedio);
+            //decimal saldo = planVentaMensual.Sum(p=>p.saldo.MoneyAccount);
+            //ModelData.Atributo.Atributo_Money atributo_Saldo = AtributoFactory.buildMoney(saldo);
+            //decimal planDiarioPromedio = saldo / VariablesEntorno.annoAbierto.CantidadDias;
+            //ModelData.Atributo.Atributo_Money atributo_PlanDiarioPromedio = AtributoFactory.buildMoney(planDiarioPromedio);
 
-            objectsTotal[1] = atributo_PlanDiarioPromedio.getMoneyFormated();
-            objectsTotal[2] = atributo_Saldo.Value;
+            //objectsTotal[1] = atributo_PlanDiarioPromedio.getMoneyFormated();
+            //objectsTotal[2] = atributo_Saldo.Value;
             dataTable.Rows.Add(objectsTotal);           
         }
         public List<PlanVentaMensual> getPlanesVentas()
@@ -93,10 +92,10 @@ namespace NucleoEV.UIController.Component
             for (int i = 0; i < planVentaMensual.Count; i++)
             {
                 decimal saldo = (decimal)dataGrid[2, i].Value;
-                if (saldo != planVentaMensual[i].saldo.MoneyAccount)
-                {
-                    planVentaMensual[i].saldo.setMoney(saldo);                                   
-                }      
+                //if (saldo != planVentaMensual[i].saldo.MoneyAccount)
+                //{
+                //    planVentaMensual[i].saldo.setMoney(saldo);                                   
+                //}      
             }
             return planVentaMensual;
         }
@@ -109,9 +108,9 @@ namespace NucleoEV.UIController.Component
                     TotalizarColumna(2);
                     totalizarFila();
                     decimal saldo = (decimal)dataGrid[2, 12].Value;
-                    decimal planDiarioAnual = saldo / VariablesEntorno.annoAbierto.CantidadDias;
-                    ModelData.Atributo.Atributo_Money atributo_PlanDiarioAnual = AtributoFactory.buildMoney(planDiarioAnual);
-                    dataGrid[1, 12].Value = atributo_PlanDiarioAnual.getMoneyFormated();
+                    //decimal planDiarioAnual = saldo / VariablesEntorno.annoAbierto.CantidadDias;
+                    //ModelData.Atributo.Atributo_Money atributo_PlanDiarioAnual = AtributoFactory.buildMoney(planDiarioAnual);
+                    //dataGrid[1, 12].Value = atributo_PlanDiarioAnual.getMoneyFormated();
                 }
             }
             catch (Exception ex)
@@ -124,9 +123,9 @@ namespace NucleoEV.UIController.Component
             if (filaSeleccionada > -1 && filaSeleccionada < 12)
             {               
                 int indexColumnaTotal = 1;
-                decimal planDiario = (decimal)dataGrid.Rows[filaSeleccionada].Cells[2].Value / Session.countDaysOfMounth(filaSeleccionada+1);
-                ModelData.Atributo.Atributo_Money atributo_Money = AtributoFactory.buildMoney(planDiario);
-                dataGrid[indexColumnaTotal, filaSeleccionada].Value = atributo_Money.getMoneyFormated();
+                //decimal planDiario = (decimal)dataGrid.Rows[filaSeleccionada].Cells[2].Value / Session.countDaysOfMounth(filaSeleccionada+1);
+                //ModelData.Atributo.Atributo_Money atributo_Money = AtributoFactory.buildMoney(planDiario);
+                //dataGrid[indexColumnaTotal, filaSeleccionada].Value = atributo_Money.getMoneyFormated();
             }
         }
         public new void dataGrid_CellValidatingMoney(object sender, DataGridViewCellValidatingEventArgs e)
@@ -147,7 +146,7 @@ namespace NucleoEV.UIController.Component
                 {                  
                     valorAnterior = (valorAnterior == "") ? "0.00" : valorAnterior;                  
                     ModelData.Atributo.Atributo_Money atributo_Money = buildMoney(e.FormattedValue.ToString());                   
-                    dataGrid[e.ColumnIndex, e.RowIndex].Value = (atributo_Money.isValido) ? atributo_Money.MoneyAccount.ToString(): valorAnterior;
+                    //dataGrid[e.ColumnIndex, e.RowIndex].Value = (atributo_Money.isValido) ? atributo_Money.MoneyAccount.ToString(): valorAnterior;
                     if (!atributo_Money.isValido)
                     {
                         e.Cancel = true;

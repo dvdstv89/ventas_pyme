@@ -1,15 +1,13 @@
-﻿using ModelData.Model;
-using NucleoEV.Model;
+﻿using NucleoEV.Model;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System;
 using NucleoEV.UI;
 using NucleoEV.Tema;
 using NucleoEV.Controller;
-using ModelData;
-using NucleoEV.Service;
+
 using System.Drawing;
-using LocalData.Model;
+
 using static System.Net.Mime.MediaTypeNames;
 using System.CodeDom;
 
@@ -31,11 +29,11 @@ namespace NucleoEV.UIController
 
         MainUI forma = new MainUI();
         Session session;
-        Empresa empresa;
-        SecurityToken securityToken;
-        List<Complejo> complejos;
-        Configuracion configuracion;
-        PeriodoAbierto periodoAbierto;
+        //Empresa empresa;
+        //SecurityToken securityToken;
+        //List<Complejo> complejos;
+        //Configuracion configuracion;
+        //PeriodoAbierto periodoAbierto;
         object activeForm = null;        
         Button botonActivo=null;
         bool aplicacionEstaAbierta=false;
@@ -78,11 +76,11 @@ namespace NucleoEV.UIController
             {
                 if (this.session.tokenEsAutentico)
                 {
-                    this.empresa = session.empresa;
-                    this.securityToken = VariablesEntorno.securityToken;
-                    this.configuracion = session.configuracion;
-                    this.periodoAbierto = session.periodoAbierto;
-                    complejos = empresa.complejos;
+                    //this.empresa = session.empresa;
+                    //this.securityToken = VariablesEntorno.securityToken;
+                    //this.configuracion = session.configuracion;
+                    //this.periodoAbierto = session.periodoAbierto;
+                    //complejos = empresa.complejos;
                     btnMaximizarMenu_Click(sender, e);
                     aplicarTema();
                     llenarFooter();
@@ -107,22 +105,22 @@ namespace NucleoEV.UIController
             forma.BackColor = new TemaAplication().inicializarColor(TipoColor.FormBackColor);
             forma.panelLogo.BackColor = new TemaAplication().inicializarColor(TipoColor.Logo);
             forma.panelSideMenu.BackColor = new TemaAplication().inicializarColor(TipoColor.LateralMenu);        
-            session.temaAplication.inicializarBoton(ref forma.btnUsuario, Tema.TipoBoton.Banner);                 
-            session.temaAplication.inicializarBoton(ref forma.btnInicio, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnTiendas, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnUsuario, Tema.TipoBoton.Banner);                 
+            //session.temaAplication.inicializarBoton(ref forma.btnInicio, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnTiendas, Tema.TipoBoton.Menu);
             //session.temaAplication.inicializarBoton(ref forma.btnContabilidad, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnRegistroVentas, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnConciliacionesBancarias, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnParteVentaOperativo, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnRegistroVentas, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnConciliacionesBancarias, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnParteVentaOperativo, Tema.TipoBoton.Menu);
           //  session.temaAplication.inicializarBoton(ref forma.btnCapitalHumano, Tema.TipoBoton.Menu);
            // session.temaAplication.inicializarBoton(ref forma.btnAgua, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnMetrocontadores, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnReporte, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnSeguridad, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnConfiguracion, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnInformacion, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnMinimizarMenu, Tema.TipoBoton.Menu);
-            session.temaAplication.inicializarBoton(ref forma.btnMaximizarMenu, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnMetrocontadores, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnReporte, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnSeguridad, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnConfiguracion, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnInformacion, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnMinimizarMenu, Tema.TipoBoton.Menu);
+            //session.temaAplication.inicializarBoton(ref forma.btnMaximizarMenu, Tema.TipoBoton.Menu);
          //   session.temaAplication.inicializarBoton(ref forma.btnDepartamentoComercial, Tema.TipoBoton.Menu);
             forma.FooterBar.BackColor = new TemaAplication().inicializarColor(TipoColor.FooterBarBC);
             forma.FooterBar.ForeColor = new TemaAplication().inicializarColor(TipoColor.FooterBarFC);
@@ -165,22 +163,22 @@ namespace NucleoEV.UIController
         }
         void visualizarFuncionalidadesPorPermisos()
         {  
-            forma.btnTiendas.Visible = PermisoData.Rol_Comercial.estaPermitido(VariablesEntorno.securityToken.permisos);
+            //forma.btnTiendas.Visible = PermisoData.Rol_Comercial.estaPermitido(VariablesEntorno.securityToken.permisos);
            // forma.btnContabilidad.Visible = Permiso.Rol_Contador.estaPermitido();
-            forma.btnRegistroVentas.Visible = PermisoData.Rol_Caja_Central.estaPermitido(VariablesEntorno.securityToken.permisos);
-            forma.btnConciliacionesBancarias.Visible = PermisoData.Rol_Economico.estaPermitido(VariablesEntorno.securityToken.permisos);
-            forma.btnParteVentaOperativo.Visible = PermisoData.Transmitir_Parte_Venta_Operativo.estaPermitido(VariablesEntorno.securityToken.permisos);
+            //forma.btnRegistroVentas.Visible = PermisoData.Rol_Caja_Central.estaPermitido(VariablesEntorno.securityToken.permisos);
+            //forma.btnConciliacionesBancarias.Visible = PermisoData.Rol_Economico.estaPermitido(VariablesEntorno.securityToken.permisos);
+            //forma.btnParteVentaOperativo.Visible = PermisoData.Transmitir_Parte_Venta_Operativo.estaPermitido(VariablesEntorno.securityToken.permisos);
            // forma.btnAgua.Visible = Permiso.Rol_Energetico.estaPermitido();
-            forma.btnMetrocontadores.Visible = PermisoData.Rol_Energetico.estaPermitido(VariablesEntorno.securityToken.permisos);           
-            forma.btnSeguridad.Visible = PermisoData.Rol_Informatico.estaPermitido(VariablesEntorno.securityToken.permisos);
-            forma.btnConfiguracion.Visible = PermisoData.Rol_Informatico.estaPermitido(VariablesEntorno.securityToken.permisos);
+            //forma.btnMetrocontadores.Visible = PermisoData.Rol_Energetico.estaPermitido(VariablesEntorno.securityToken.permisos);           
+            //forma.btnSeguridad.Visible = PermisoData.Rol_Informatico.estaPermitido(VariablesEntorno.securityToken.permisos);
+            //forma.btnConfiguracion.Visible = PermisoData.Rol_Informatico.estaPermitido(VariablesEntorno.securityToken.permisos);
            // forma.btnDepartamentoComercial.Visible = Permiso.Rol_Departamento_Comercial.estaPermitido();
         }
         private void llenarFooter()
         {
-            forma.lbAnno.Text = periodoAbierto.annoAbierto.ToString();
-            forma.lbMes.Text = periodoAbierto.mesAbierto.ToString();
-            forma.lbTokenUtilizado.Text = VariablesEntorno.securityToken.token.Value;
+            //forma.lbAnno.Text = periodoAbierto.annoAbierto.ToString();
+            //forma.lbMes.Text = periodoAbierto.mesAbierto.ToString();
+            //forma.lbTokenUtilizado.Text = VariablesEntorno.securityToken.token.Value;
         }
         private void btnSincronizarConServidor_Click(object sender, EventArgs e)
         {
@@ -197,8 +195,8 @@ namespace NucleoEV.UIController
         {
             try
             {
-                LoginUIController loginUIController = new LoginUIController(session, this);
-                loginUIController.Ejecutar().ShowDialog();
+                //LoginUIController loginUIController = new LoginUIController(session, this);
+                //loginUIController.Ejecutar().ShowDialog();
             }
             catch (Exception ex)
             {
@@ -210,11 +208,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Sucursal Comercial Caracol Este Vedado",imagen_inicio);
-                DashboardUIController formulario = new DashboardUIController(session);
-                OpenChildForm(formulario);
+                //DashboardUIController formulario = new DashboardUIController(session);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
                 cambiarBotonActivo(forma.btnInicio);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -226,11 +224,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Tiendas", imagen_tienda);
-                GestionarTiendaUIController formulario = new GestionarTiendaUIController(session, this);
-                OpenChildForm(formulario);
+                //GestionarTiendaUIController formulario = new GestionarTiendaUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
                 cambiarBotonActivo(forma.btnTiendas);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -242,11 +240,11 @@ namespace NucleoEV.UIController
             try
             {
               //  setHeaderText("Departamento Comercial");
-                GestionarDepartamentoComercialUIController formulario = new GestionarDepartamentoComercialUIController(session, this);
-                OpenChildForm(formulario);
+                //GestionarDepartamentoComercialUIController formulario = new GestionarDepartamentoComercialUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
              //   cambiarBotonActivo(forma.btnDepartamentoComercial);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -258,11 +256,11 @@ namespace NucleoEV.UIController
             try
             {
                 //setHeaderText("Departamento de Capital Humano");
-                GestionarCapitalHumanoUIController formulario = new GestionarCapitalHumanoUIController(session, this);
-                OpenChildForm(formulario);
+                //GestionarCapitalHumanoUIController formulario = new GestionarCapitalHumanoUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
               //  cambiarBotonActivo(forma.btnCapitalHumano);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -274,11 +272,11 @@ namespace NucleoEV.UIController
             try
             {
                // setHeaderText("Contabilidad");
-                GestionarParteVentaResumidaUIController formulario = new GestionarParteVentaResumidaUIController(session, this);
-                OpenChildForm(formulario);
+                //GestionarParteVentaResumidaUIController formulario = new GestionarParteVentaResumidaUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
               //  cambiarBotonActivo(forma.btnContabilidad);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -290,11 +288,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Conciliaciones Bancarias", imagen_conciliaciones);
-                GestionarConciliacionUIController formulario = new GestionarConciliacionUIController(session, this);
-                OpenChildForm(formulario);
+                //GestionarConciliacionUIController formulario = new GestionarConciliacionUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
                 cambiarBotonActivo(forma.btnConciliacionesBancarias);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -306,11 +304,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Registro de ventas", imagen_registro_venta);
-                GestionarParteVentaAmpliadoUIController formulario = new GestionarParteVentaAmpliadoUIController(session, this);
-                OpenChildForm(formulario);
+                //GestionarParteVentaAmpliadoUIController formulario = new GestionarParteVentaAmpliadoUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
                 cambiarBotonActivo(forma.btnRegistroVentas);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -322,11 +320,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Parte de venta operativo", imagen_parte_venta);
-                ParteVentaOperativoUIController formulario = new ParteVentaOperativoUIController(session, this);
-                OpenChildForm(formulario);
+                //ParteVentaOperativoUIController formulario = new ParteVentaOperativoUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
-                cambiarBotonActivo(forma.btnParteVentaOperativo);
-                formulario.Ejecutar().Show();
+                //cambiarBotonActivo(forma.btnParteVentaOperativo);
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -337,12 +335,12 @@ namespace NucleoEV.UIController
         {
             try
             {
-               // setHeaderText("Consumo de agua");
-                AguaUIController formulario = new AguaUIController(session, this);
-                OpenChildForm(formulario);
+                //setHeaderText("Consumo de agua");
+                //AguaUIController formulario = new AguaUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
               //  cambiarBotonActivo(forma.btnAgua);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -354,11 +352,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Metrocontadores", imagen_metrocontadores);
-                ElectricidadUIController formulario = new ElectricidadUIController(session, this);
-                OpenChildForm(formulario);
+                //ElectricidadUIController formulario = new ElectricidadUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
                 cambiarBotonActivo(forma.btnMetrocontadores);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -370,11 +368,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Revisión económica", imagen_revisiones_economicas);
-                ReporteUIController formulario = new ReporteUIController(session, this);
-                OpenChildForm(formulario);
+                //ReporteUIController formulario = new ReporteUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
                 cambiarBotonActivo(forma.btnReporte);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -386,11 +384,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Seguridad", imagen_seguridad);
-                GestionarSecurityTokenUIController formulario = new GestionarSecurityTokenUIController(session, this);
-                OpenChildForm(formulario);
+                //GestionarSecurityTokenUIController formulario = new GestionarSecurityTokenUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
                 cambiarBotonActivo(forma.btnSeguridad);
-                formulario.Ejecutar().Show();                
+                //formulario.Ejecutar().Show();                
             }
             catch (Exception ex)
             {
@@ -402,11 +400,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Configuración", imagen_configuracion);
-                SistemaUIController formulario = new SistemaUIController(session);
-                OpenChildForm(formulario);
+                //SistemaUIController formulario = new SistemaUIController(session);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
                 cambiarBotonActivo(forma.btnConfiguracion);
-                formulario.Ejecutar().Show();
+                //formulario.Ejecutar().Show();
             }
             catch (Exception ex)
             {
@@ -418,11 +416,11 @@ namespace NucleoEV.UIController
             try
             {
                 setHeaderText("Información", imagen_informacion);
-                InformacionUIController formulario = new InformacionUIController(session, this);
-                OpenChildForm(formulario);
+                //InformacionUIController formulario = new InformacionUIController(session, this);
+                //OpenChildForm(formulario);
                 //ocultarMenu();
                 cambiarBotonActivo(forma.btnInformacion);
-                formulario.Ejecutar().Show();                           
+                //formulario.Ejecutar().Show();                           
             }
             catch (Exception ex)
             {

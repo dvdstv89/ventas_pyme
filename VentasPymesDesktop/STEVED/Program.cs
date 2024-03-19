@@ -1,10 +1,10 @@
-﻿using NucleoEV.Controller;
-using NucleoEV.Model;
+﻿using NucleoEV.Model;
 using NucleoEV.UIController;
 using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
+using MyUI.Enum.Message;
 
 namespace NucleoEV
 {
@@ -13,32 +13,22 @@ namespace NucleoEV
         [STAThread]
         static void Main()
         {
-            bool allReady = MyInstaller.Service.InstallerService.InstallSystem();
-            if (allReady)
-            {
-                // loguin
-            }
-
-
-            //Application.Run(form.Ejecutar());
-
-/*
-            //CultureInfo cultureInfo = new CultureInfo("es-ES");
-            CultureInfo cultureInfo = new CultureInfo("en-EN");
+            CultureInfo cultureInfo = new CultureInfo("es-ES");           
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);            
             MainUIController form;
             do
             {
-                ProgressBarUIController progressBar = new ProgressBarUIController("Cargando datos ...");
+                Session session = new Session(cultureInfo);
+                ProgressBarUIController progressBar = new ProgressBarUIController(LabelText.PROGRESSBAR_CARGANDO);
                 progressBar.MostrarProgresoCircular();               
-                form = new MainUIController(new Session(cultureInfo));
+                form = new MainUIController(session);
                 progressBar.Close();
                 Application.Run(form.Ejecutar());
             } while (form.reiniciarAplicacionPorModificacionEnToken);
-*/
         }     
     }
 

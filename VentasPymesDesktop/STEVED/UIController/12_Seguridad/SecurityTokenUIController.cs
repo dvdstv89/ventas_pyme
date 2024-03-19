@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System;
 using NucleoEV.Tema;
 using NucleoEV.UI;
-using LocalData.Model;
+
 
 namespace NucleoEV.UIController
 {
@@ -15,7 +15,7 @@ namespace NucleoEV.UIController
         bool dialogResultOk;
         protected bool formularioModoModificar;
         public  SecurityToken securityToken { get; set; }        
-        protected List<Permiso> permisos;
+       
         protected List<Complejo> complejos;
         protected List<GrupoConciliacion> gruposConsiliaciones;
         protected Session session;
@@ -27,7 +27,7 @@ namespace NucleoEV.UIController
                 this.session = session;
                 this.securityToken = securityToken;
                 this.dialogResultOk = false;
-                this.permisos = PermisoData.getPermisos();
+              
                 this.complejos = ComplejoData.getByComplejosAutorizadosInSessionToken();
                 this.gruposConsiliaciones = GrupoConsiliacionData.getGrupoConsiliacionAutorizadosInSessionToken();
             }
@@ -52,15 +52,15 @@ namespace NucleoEV.UIController
 
         protected virtual void aplicarTema()
         {
-            session.temaAplication.inicializarBoton(ref forma.btnCancelar, TipoBoton.Normal); 
-            session.temaAplication.inicializarFormDialog(ref forma);
-            session.temaAplication.inicializarListView(ref forma.lwComplejo);
-            session.temaAplication.inicializarListView(ref forma.lwPermiso);
-            session.temaAplication.inicializarListView(ref forma.lwGrupoConciliacion);
+            //session.temaAplication.inicializarBoton(ref forma.btnCancelar, TipoBoton.Normal); 
+            //session.temaAplication.inicializarFormDialog(ref forma);
+            //session.temaAplication.inicializarListView(ref forma.lwComplejo);
+            //session.temaAplication.inicializarListView(ref forma.lwPermiso);
+            //session.temaAplication.inicializarListView(ref forma.lwGrupoConciliacion);
         }
         protected virtual void restablecerFormulario()
         {
-            forma.tbToken.Text = securityToken.token.Value;            
+            //forma.tbToken.Text = securityToken.token.Value;            
             LlenarListadoPermisos();
             LlenarListadoComplejos();
             LlenarListadoGrupoConsiliacion();
@@ -68,13 +68,13 @@ namespace NucleoEV.UIController
         private void LlenarListadoPermisos()
         {
             forma.lwPermiso.Items.Clear();            
-            for (int i = 0; i < permisos.Count; i++)
-            {
-                ListViewItem item = new ListViewItem();   
-                item.Text = permisos[i].getId().ToString();
-                item.SubItems.Add(permisos[i].denominacion.Value);    
-                forma.lwPermiso.Items.Add(session.temaAplication.inicializarListViewItem(item, i));
-            }
+            //for (int i = 0; i < permisos.Count; i++)
+            //{
+            //    ListViewItem item = new ListViewItem();   
+            //    item.Text = permisos[i].getId().ToString();
+            //    item.SubItems.Add(permisos[i].denominacion.Value);    
+            //    forma.lwPermiso.Items.Add(session.temaAplication.inicializarListViewItem(item, i));
+            //}
         }
         private void LlenarListadoComplejos()
         {
@@ -82,8 +82,8 @@ namespace NucleoEV.UIController
             for (int i = 0; i < complejos.Count; i++)
             {
                 ListViewItem item = new ListViewItem();              
-                item.Text = complejos[i].id.ToString();
-                item.SubItems.Add(complejos[i].denominacion.Value);              
+                //item.Text = complejos[i].id.ToString();
+                //item.SubItems.Add(complejos[i].denominacion.Value);              
                 forma.lwComplejo.Items.Add(session.temaAplication.inicializarListViewItem(item, i));
             }
         }
@@ -93,8 +93,8 @@ namespace NucleoEV.UIController
             for (int i = 0; i < gruposConsiliaciones.Count; i++)
             {
                 ListViewItem item = new ListViewItem();
-                item.Text = gruposConsiliaciones[i].id.ToString();
-                item.SubItems.Add(gruposConsiliaciones[i].denominacion.Value);
+                //item.Text = gruposConsiliaciones[i].id.ToString();
+                //item.SubItems.Add(gruposConsiliaciones[i].denominacion.Value);
                 forma.lwGrupoConciliacion.Items.Add(session.temaAplication.inicializarListViewItem(item, i));
             }
         }
@@ -114,7 +114,7 @@ namespace NucleoEV.UIController
         {
             try
             {   
-                securityToken.denominacion.Value = forma.tbDenominacion.Text;
+                //securityToken.denominacion.Value = forma.tbDenominacion.Text;
                
 
                 List<string> list = new List<string>();
@@ -122,21 +122,21 @@ namespace NucleoEV.UIController
                 {
                     if (forma.lwComplejo.Items[i].Checked)
                     {
-                        list.Add(complejos[i].getId());
+                        //list.Add(complejos[i].getId());
                        
                     }
                 }
-                securityToken.complejos.Value = String.Join(",",list);
+                //securityToken.complejos.Value = String.Join(",",list);
 
                 list = new List<string>();
                 for (int i = 0; i < forma.lwPermiso.Items.Count; i++)
                 {                    
                     if (forma.lwPermiso.Items[i].Checked)
                     {
-                        list.Add(permisos[i].getId());
+                        //list.Add(permisos[i].getId());
                     }
                 }
-                securityToken.permisos.Value = String.Join(",", list);
+                //securityToken.permisos.Value = String.Join(",", list);
 
                 list = new List<string>();
                 for (int i = 0; i < forma.lwGrupoConciliacion.Items.Count; i++)
@@ -146,9 +146,10 @@ namespace NucleoEV.UIController
                         list.Add(forma.lwGrupoConciliacion.Items[i].Text);
                     }
                 }
-                securityToken.gruposConciliacion.Value = String.Join(",", list);
-                dialogResultOk = true;
-                return securityToken.validar();
+                //securityToken.gruposConciliacion.Value = String.Join(",", list);
+                //dialogResultOk = true;
+                //return securityToken.validar();
+                return true;
             }
             catch (Exception ex)
             {

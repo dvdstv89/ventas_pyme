@@ -1,5 +1,4 @@
-﻿using Database.Class;
-using ModelData;
+﻿using ModelData;
 using ModelData.Atributo;
 using ModelData.Model;
 using NucleoEV.UI;
@@ -66,12 +65,12 @@ namespace NucleoEV.UIController.Component
         {
             foreach (FormaPago formaPago in formasPago)
             {
-                int apuntador = 0;
+                //int apuntador = 0;
                 object[] objectsTotal = new object[cantidadColumnasEditables + 1];
-                objectsTotal[apuntador++] = formaPago.denominacion;
-                ParteVentaDiario parteVentaDiario = partesVentasDiarios.Find(t => t.formaPago.getId() == formaPago.getId());
+                //objectsTotal[apuntador++] = formaPago.denominacion;
+                //ParteVentaDiario parteVentaDiario = partesVentasDiarios.Find(t => t.formaPago.getId() == formaPago.getId());
                 ModelData.Atributo.Atributo_Money atributo_Money = AtributoFactory.buildMoney(0);
-                objectsTotal[apuntador++] = (parteVentaDiario == null) ? atributo_Money.getValueVisual() : parteVentaDiario.saldoMasComision.getValueVisual();               
+                //objectsTotal[apuntador++] = (parteVentaDiario == null) ? atributo_Money.getValueVisual() : parteVentaDiario.saldoMasComision.getValueVisual();               
                 dataTable.Rows.Add(objectsTotal);
             }            
         }
@@ -80,7 +79,7 @@ namespace NucleoEV.UIController.Component
             ModelData.Atributo.Atributo_Money atributo_Money = AtributoFactory.buildMoney(0);
             object[] objectsTotal = new object[2];
             objectsTotal[0] = "Total";
-            objectsTotal[1] = atributo_Money.Value;           
+            //objectsTotal[1] = atributo_Money.Value;           
             dataTable.Rows.Add(objectsTotal);            
         }
 
@@ -89,25 +88,25 @@ namespace NucleoEV.UIController.Component
             List<ParteVentaDiario> partes = new List<ParteVentaDiario>();           
             for (int i = 0; i < formasPago.Count; i++)
             {
-                ParteVentaDiario parteVentaDiario = partesVentasDiarios.Find(t => t.formaPago.getId() == formasPago[i].getId());
-                if(parteVentaDiario!=null)
-                {
-                    parteVentaDiario.saldo.setMoney((decimal)dataGrid[1, i].Value);                  
-                    parteVentaDiario.isEliminada.Value = (parteVentaDiario.saldo.MoneyAccount == 0) ? true : false;
-                    partes.Add(parteVentaDiario);
-                }
-                else
-                {
-                    parteVentaDiario = new ParteVentaDiario(tokenId);
-                    parteVentaDiario.fecha.setFecha(fecha);
-                    parteVentaDiario.formaPago.setObjeto(formasPago[i]);
-                    parteVentaDiario.idTienda.Value = tienda.id.getValueAsInt();
-                    parteVentaDiario.moneda.setObjeto(MonedaData.getMonedaByDefaul());
-                    parteVentaDiario.saldo.setMoney((decimal)dataGrid[1, i].Value);
-                    parteVentaDiario.setId();
-                    if (parteVentaDiario.saldo.MoneyAccount > 0)
-                        partes.Add(parteVentaDiario);
-                }              
+                //ParteVentaDiario parteVentaDiario = partesVentasDiarios.Find(t => t.formaPago.getId() == formasPago[i].getId());
+                //if(parteVentaDiario!=null)
+                //{
+                //    //parteVentaDiario.saldo.setMoney((decimal)dataGrid[1, i].Value);                  
+                //    //parteVentaDiario.isEliminada.Value = (parteVentaDiario.saldo.MoneyAccount == 0) ? true : false;
+                //    partes.Add(parteVentaDiario);
+                //}
+                //else
+                //{
+                //    parteVentaDiario = new ParteVentaDiario(tokenId);
+                //    //parteVentaDiario.fecha.setFecha(fecha);
+                //    //parteVentaDiario.formaPago.setObjeto(formasPago[i]);
+                //    //parteVentaDiario.idTienda.Value = tienda.id.getValueAsInt();
+                //    //parteVentaDiario.moneda.setObjeto(MonedaData.getMonedaByDefaul());
+                //    //parteVentaDiario.saldo.setMoney((decimal)dataGrid[1, i].Value);
+                //    //parteVentaDiario.setId();
+                //    //if (parteVentaDiario.saldo.MoneyAccount > 0)
+                //    //    partes.Add(parteVentaDiario);
+                //}              
             }
             return partes;
         }

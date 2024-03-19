@@ -1,6 +1,4 @@
-﻿using GlobalContracts.Message;
-using GlobalContracts.Model.Mensaje;
-using MyUI.Service;
+﻿using MyUI.Service;
 using System;
 using System.Windows.Forms;
 
@@ -8,10 +6,9 @@ namespace MyUI.UIControler
 {
     public class BaseUIController<Forma> where Forma : Form
     {   
-        protected Forma forma { get; set; }
+        protected Forma forma { get; }
         public bool dialogResultOk;
-        public bool formularioModoModificar;
-        public Mensaje resultMensaje { get; set; }
+        public bool formularioModoModificar;       
         public BaseUIController(Forma forma)
         {
             try
@@ -21,7 +18,7 @@ namespace MyUI.UIControler
             }
             catch (Exception ex)
             {
-                DialogService.ShowDialog(MensajeFactory.EXCEPTION(ex.Message));
+                DialogService.EXCEPTION(ex.Message);                
             }
         }
         public virtual void forma_Load(object sender, EventArgs e)
@@ -56,7 +53,7 @@ namespace MyUI.UIControler
             }
             catch (Exception ex)
             {
-                DialogService.ShowDialog(MensajeFactory.EXCEPTION(ex.Message));
+                DialogService.EXCEPTION(ex.Message);
             }
         }        
         public Forma getForma()

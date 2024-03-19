@@ -1,10 +1,4 @@
-﻿using FontAwesome.Sharp;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace MyUI.Component
@@ -27,8 +21,7 @@ namespace MyUI.Component
             label.ForeColor = textColor;
             label.Font = font;  
             label.BackColor = backColor;
-            label.Text = text;
-           
+            label.Text = text;           
         }
     }
 }

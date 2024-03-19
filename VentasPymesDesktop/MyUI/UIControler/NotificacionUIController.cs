@@ -1,30 +1,53 @@
 ﻿using System;
-using MyUI.Component;
 using MyUI.UI;
-using GlobalContracts.Model.Mensaje;
-using GlobalContracts.Interface;
+using MyUI.Model;
+using MyUI.Factories;
+using MyUI.Service;
+using System.Windows.Forms;
 
 namespace MyUI.UIControler
 {
-    public class NotificacionUIController : BaseUIController<NotificationUI>, IController<NotificationUI>
+    internal class NotificacionUIController : BaseUIController<NotificationUI>
     {
-        Mensaje message;
+        Notificacion notificacion;
         public bool isValidado { get; set; }
-        public NotificacionUIController(Mensaje message) : base(new NotificationUI())
+        public NotificacionUIController(NotificationUI notificationUI, Notificacion notificacion) : base(notificationUI)
         {
-            this.message = message;
+            this.notificacion = notificacion;
         }
         public NotificationUI ejecutar()
         {
             forma.Load += new EventHandler(forma_Load);
-            forma.btCancelar.Click += new EventHandler(btnCancelar_Click);
+            forma.btnCancelar.Click += new EventHandler(btnCancelar_Click);
+            forma.btnCancelarOculto.Click += new EventHandler(btnCancelar_Click);
+            forma.btnAceptar.Click += new EventHandler(btnAceptar_Click);
             return forma;
         }
         public override void aplicarTema()
         {
-            FormularioStyleFactory.NOTIFICATION(this.forma, message);
-            RichTextBoxStyleFactory.TEXT_MENSAJE_NOTIFICACION_EXCLUSIVO(forma.textMensaje, message);
-            forma.icon.IconChar = message.getIcon();
+            if(notificacion.tipoMensaje != Enum.MensajeType.Confirmation)
+            {                
+                forma.btnCancelar.Visible = false;
+            }
+
+            ButtonIconStyleFactory.ACEPTAR(forma.btnAceptar);
+            ButtonIconStyleFactory.CANCELAR(forma.btnCancelar);
+
+            FormularioStyleFactory.NOTIFICATION(this.forma, notificacion);
+            RichTextBoxStyleFactory.TEXT_MENSAJE_NOTIFICACION_EXCLUSIVO(forma.textMensaje, notificacion);
+            forma.icon.IconChar = notificacion.iconChar;
+        }
+
+        public void btnAceptar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                forma.DialogResult = DialogResult.OK; return;
+            }
+            catch (Exception ex)
+            {
+                DialogService.EXCEPTION(ex.Message);
+            }
         }
     }
 }

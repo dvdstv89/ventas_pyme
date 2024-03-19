@@ -7,8 +7,6 @@ using NucleoEV.Tema;
 using NucleoEV.UI;
 using ModelData.Service.RemotoDatabaseClient;
 using ModelData;
-using LocalData.Atributo;
-using LocalData.Model;
 
 namespace NucleoEV.UIController
 {
@@ -17,7 +15,7 @@ namespace NucleoEV.UIController
         MainUIController mainUI;       
         List<SecurityToken> tokens;
         SecurityToken tokenSeleccionado= null;
-        protected List<Permiso> permisos;
+        //protected List<Permiso> permisos;
         protected List<Complejo> complejos;
         protected List<GrupoConciliacion> gruposConsiliacion;
         public GestionarSecurityTokenUIController(Session session, MainUIController mainUI) : base(session, new GestionarSecurityTokenUI())
@@ -25,7 +23,7 @@ namespace NucleoEV.UIController
             try
             {            
                 this.mainUI = mainUI;
-                permisos = PermisoData.getPermisos();
+                //permisos = PermisoData.getPermisos();
                 complejos = ComplejoData.getByComplejosAutorizadosInSessionToken();
                 gruposConsiliacion = GrupoConsiliacionData.getGrupoConsiliacionAutorizadosInSessionToken();
             }
@@ -62,11 +60,11 @@ namespace NucleoEV.UIController
         }
         void aplicarTema()
         {
-            session.temaAplication.inicializarListView(ref getForma().lwToken);          
-            forma.BackColor  = session.temaAplication.formularioBgColor();          
-            session.temaAplication.inicializarToolStripButton(ref getForma().btnAdicionar, TipoToolStripButton.Adicionar);
-            session.temaAplication.inicializarToolStripButton(ref getForma().btnModificar, TipoToolStripButton.Modificar);           
-            session.temaAplication.inicializarToolStripButton(ref getForma().btnEliminar, TipoToolStripButton.Eliminar);
+            //session.temaAplication.inicializarListView(ref getForma().lwToken);          
+            //forma.BackColor  = session.temaAplication.formularioBgColor();          
+            //session.temaAplication.inicializarToolStripButton(ref getForma().btnAdicionar, TipoToolStripButton.Adicionar);
+            //session.temaAplication.inicializarToolStripButton(ref getForma().btnModificar, TipoToolStripButton.Modificar);           
+            //session.temaAplication.inicializarToolStripButton(ref getForma().btnEliminar, TipoToolStripButton.Eliminar);
             getForma().panelDetails.BackColor = session.temaAplication.inicializarColor(TipoColor.PanelDetails);
             getForma().panelBanner.BackColor = new TemaAplication().inicializarColor(TipoColor.PanelBannerDetails);
             getForma().lbDetailsHeaderTitle.Font = new TemaAplication().inicializarTexto(TipoTexto.Title);
@@ -87,10 +85,10 @@ namespace NucleoEV.UIController
             for (int i = 0; i < tokens.Count; i++)
             {
                 ListViewItem item = new ListViewItem();  
-                item.Text = tokens[i].token.Value;
-                item.SubItems.Add(tokens[i].denominacion.Value);
-                item.SubItems.Add(tokens[i].complejos.Value);
-                item.SubItems.Add(tokens[i].permisos.Value);
+                //item.Text = tokens[i].token.Value;
+                //item.SubItems.Add(tokens[i].denominacion.Value);
+                //item.SubItems.Add(tokens[i].complejos.Value);
+                //item.SubItems.Add(tokens[i].permisos.Value);
                 getForma().lwToken.Items.Add(session.temaAplication.inicializarListViewItem(item, i));
             }
         }          
@@ -118,10 +116,10 @@ namespace NucleoEV.UIController
                 DialogResult result = modificarFormController.Ejecutar().ShowDialog();      
                 if (result == DialogResult.OK)
                 {
-                    if (VariablesEntorno.securityToken.token.Value == tokenSeleccionado.token.Value)
-                    {
-                        mainUI.reiniciarFormulario();
-                    }                   
+                    //if (VariablesEntorno.securityToken.token.Value == tokenSeleccionado.token.Value)
+                    //{
+                    //    mainUI.reiniciarFormulario();
+                    //}                   
                     restablecerFormulario();
                 }             
             }
@@ -134,16 +132,16 @@ namespace NucleoEV.UIController
         {
             try
             {
-                if (VariablesEntorno.securityToken.token.Value == tokenSeleccionado.token.Value)
-                {
-                    new MensajeBox().eliminacionFail();                  
-                }
-                else
-                {
-                    new SecurityTokenRDB().eliminarToken(tokenSeleccionado);
-                    restablecerFormulario();
-                    new MensajeBox().eliminacionOk();                   
-                }                
+                //if (VariablesEntorno.securityToken.token.Value == tokenSeleccionado.token.Value)
+                //{
+                //    new MensajeBox().eliminacionFail();                  
+                //}
+                //else
+                //{
+                //    new SecurityTokenRDB().eliminarToken(tokenSeleccionado);
+                //    restablecerFormulario();
+                //    new MensajeBox().eliminacionOk();                   
+                //}                
             }
             catch (Exception ex)
             {
@@ -152,63 +150,63 @@ namespace NucleoEV.UIController
         }
         private void lwToken_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (getForma().lwToken.SelectedIndices.Count > 0)
-                {
-                    tokenSeleccionado = tokens[getForma().lwToken.SelectedIndices[0]];
-                    getForma().btnEliminar.Enabled = (VariablesEntorno.securityToken.token.Value == tokenSeleccionado.token.Value || tokenSeleccionado.superadmin.Value) ? false : true;
-                    getForma().btnModificar.Enabled = (VariablesEntorno.securityToken.token.Value == tokenSeleccionado.token.Value || tokenSeleccionado.superadmin.Value) ? false : true;
+            //try
+            //{
+            //    if (getForma().lwToken.SelectedIndices.Count > 0)
+            //    {
+            //        tokenSeleccionado = tokens[getForma().lwToken.SelectedIndices[0]];
+            //        getForma().btnEliminar.Enabled = (VariablesEntorno.securityToken.token.Value == tokenSeleccionado.token.Value || tokenSeleccionado.superadmin.Value) ? false : true;
+            //        getForma().btnModificar.Enabled = (VariablesEntorno.securityToken.token.Value == tokenSeleccionado.token.Value || tokenSeleccionado.superadmin.Value) ? false : true;
                    
-                    getForma().panelDetails.Visible = true;
-                    getForma().tbToken.Text = tokenSeleccionado.token.Value;
-                    getForma().tbDenominacion.Text = tokenSeleccionado.denominacion.Value;
-                    getForma().lbxComplejos.Text = String.Empty;
-                    getForma().lbxPermisos.Text = String.Empty;
-                    getForma().lbxGrupoConsiliacion.Text = String.Empty;
+            //        getForma().panelDetails.Visible = true;
+            //        getForma().tbToken.Text = tokenSeleccionado.token.Value;
+            //        getForma().tbDenominacion.Text = tokenSeleccionado.denominacion.Value;
+            //        getForma().lbxComplejos.Text = String.Empty;
+            //        getForma().lbxPermisos.Text = String.Empty;
+            //        getForma().lbxGrupoConsiliacion.Text = String.Empty;
 
-                    List<string> complejoList = tokenSeleccionado.getIdComplejos();
-                    for (int i = 0; i < complejoList.Count; i++)
-                    {
-                        Complejo aux = complejos.Find(c => c.getId() == complejoList[i]);
-                        if (getForma().lbxComplejos.Text != String.Empty)
-                            getForma().lbxComplejos.Text += "\r\n";
-                        getForma().lbxComplejos.Text += aux.denominacion;
-                    }
+            //        List<string> complejoList = tokenSeleccionado.getIdComplejos();
+            //        for (int i = 0; i < complejoList.Count; i++)
+            //        {
+            //            Complejo aux = complejos.Find(c => c.getId() == complejoList[i]);
+            //            if (getForma().lbxComplejos.Text != String.Empty)
+            //                getForma().lbxComplejos.Text += "\r\n";
+            //            getForma().lbxComplejos.Text += aux.denominacion;
+            //        }
 
-                    List<string> permisoList = tokenSeleccionado.getIdPermisos();
-                    for (int i = 0; i < permisoList.Count; i++)
-                    {
-                        Permiso aux = permisos.Find(c => c.getId() == permisoList[i]);
-                        if (getForma().lbxPermisos.Text != String.Empty)
-                            getForma().lbxPermisos.Text += "\r\n";
-                        getForma().lbxPermisos.Text += aux.denominacion.Value;
-                    }
+            //        List<string> permisoList = tokenSeleccionado.getIdPermisos();
+            //        for (int i = 0; i < permisoList.Count; i++)
+            //        {
+            //            Permiso aux = permisos.Find(c => c.getId() == permisoList[i]);
+            //            if (getForma().lbxPermisos.Text != String.Empty)
+            //                getForma().lbxPermisos.Text += "\r\n";
+            //            getForma().lbxPermisos.Text += aux.denominacion.Value;
+            //        }
 
-                    List<string> gruposConsiliacionList = tokenSeleccionado.getIdGrupoConsiliaciones();
-                    for (int i = 0; i < gruposConsiliacionList.Count; i++)
-                    {
-                        int index = gruposConsiliacion.FindIndex(c => c.getId() == gruposConsiliacionList[i]);
-                        if (index >= 0)
-                        {
-                            if (getForma().lbxGrupoConsiliacion.Text != String.Empty)
-                                getForma().lbxGrupoConsiliacion.Text += "\r\n";
-                            getForma().lbxGrupoConsiliacion.Text += gruposConsiliacion[index].denominacion;
-                        }
-                    }
-                }
-                else
-                {
-                    tokenSeleccionado = null;
-                    getForma().btnEliminar.Enabled = false;
-                    getForma().btnModificar.Enabled = false;
-                    getForma().panelDetails.Visible = false;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            //        List<string> gruposConsiliacionList = tokenSeleccionado.getIdGrupoConsiliaciones();
+            //        for (int i = 0; i < gruposConsiliacionList.Count; i++)
+            //        {
+            //            int index = gruposConsiliacion.FindIndex(c => c.getId() == gruposConsiliacionList[i]);
+            //            if (index >= 0)
+            //            {
+            //                if (getForma().lbxGrupoConsiliacion.Text != String.Empty)
+            //                    getForma().lbxGrupoConsiliacion.Text += "\r\n";
+            //                getForma().lbxGrupoConsiliacion.Text += gruposConsiliacion[index].denominacion;
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        tokenSeleccionado = null;
+            //        getForma().btnEliminar.Enabled = false;
+            //        getForma().btnModificar.Enabled = false;
+            //        getForma().panelDetails.Visible = false;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message);
+            //}
         }              
         public GestionarSecurityTokenUI getForma()
         {
