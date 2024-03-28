@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System.Threading;
+using System.Windows.Forms;
 using MyUI.Component;
 using MyUI.Model;
 
@@ -19,6 +20,10 @@ namespace MyUI.Factories
         {
             BasicTextBox(textBox, true, true);           
         }
+        public static void MULTILINE(TextBox textBox, int countLines = 2)
+        {
+            MultilineCountLines(textBox, countLines);
+        }
         public static void TEXT_MENSAJE(TextBox textBox, Notificacion mensaje)
         {
             MultilineTextBox(textBox, mensaje);
@@ -31,7 +36,8 @@ namespace MyUI.Factories
             textBoxComponent.backColor = ModuleConfig.skin.textBoxBackColor;
             textBoxComponent.font = ModuleConfig.skin.textBoxFont;
             textBoxComponent.padding = ModuleConfig.skin.textBoxPadding;
-            textBoxComponent.size = ModuleConfig.skin.textBoxSize;
+            textBoxComponent.size = textBox.Size;
+            // textBoxComponent.size = ModuleConfig.skin.textBoxSize;
             textBoxComponent.enable = enabled;
             textBoxComponent.password = password;
             textBoxComponent.applyStyle();          
@@ -52,8 +58,23 @@ namespace MyUI.Factories
             textBoxComponent.font = ModuleConfig.skin.textBoxMultilineFont;
             textBoxComponent.padding = ModuleConfig.skin.textBoxMultilinePadding;
             textBoxComponent.backColor = mensaje.color;
-            textBoxComponent.text = mensaje.ToString();                 
+            textBoxComponent.text = mensaje.ToString();
             textBoxComponent.applyStyle();           
+        }
+
+        private static void MultilineCountLines(TextBox textBox, int countLines)
+        {            
+            textBox.Multiline = true;           
+            textBox.Visible = true;
+            TextBoxComponent textBoxComponent = new TextBoxComponent(textBox);
+            textBoxComponent.textColor = ModuleConfig.skin.textBoxTextColor;
+            textBoxComponent.backColor = ModuleConfig.skin.textBoxBackColor;
+            textBoxComponent.font = ModuleConfig.skin.textBoxFont;
+            textBoxComponent.padding = ModuleConfig.skin.textBoxPadding;
+            textBoxComponent.size = new System.Drawing.Size(textBox.Width, textBox.Height * countLines);
+            textBoxComponent.enable = true;
+            textBoxComponent.password = false;
+            textBoxComponent.applyStyle();
         }
     }
 }

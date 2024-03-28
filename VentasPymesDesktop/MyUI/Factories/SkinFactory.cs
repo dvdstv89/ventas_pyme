@@ -76,10 +76,10 @@ namespace MyUI.Factories
 
             skin.checkBoxTextColor = COLOR_DARK;
             skin.checkBoxFont = FONT_LABEL;
-            skin.checkBoxPadding = new Padding(5, 0, 0, 0);
+            skin.checkBoxPadding = new Padding(0, 0, 0, 0);
 
             skin.formFont = FONT_NORMAL;
-            skin.formStartPosition = FormStartPosition.CenterParent;
+            skin.formStartPosition = FormStartPosition.CenterScreen;
             skin.formBackColor = COLOR_CARACOL_FORM;
 
 

@@ -21,12 +21,12 @@ namespace MyUI.UIControler
                 DialogService.EXCEPTION(ex.Message);                
             }
         }
-        public virtual void forma_Load(object sender, EventArgs e)
+        protected virtual void forma_Load(object sender, EventArgs e)
         {
             aplicarTema();
             initDataForm();
         }
-        public virtual void aplicarTema()
+        protected virtual void aplicarTema()
         {
             return;
         }
@@ -34,29 +34,38 @@ namespace MyUI.UIControler
         {
             return;
         }
-        public void cerrarFormulario()
+        protected void cerrarFormulario()
         {
+            if (forma.Owner != null)
+            {
+                forma.Owner.Enabled = true;
+            }
             forma.Close();
         }
-        public void configurarFormulario()
+        protected void configurarFormulario()
         {
             forma.TopLevel = false;
             forma.FormBorderStyle = FormBorderStyle.None;
             forma.Dock = DockStyle.Fill;
             forma.BringToFront();
         }
-        public void btnCancelar_Click(object sender, EventArgs e)
+        protected void btnCancelar_Click(object sender, EventArgs e)
         {
             try
             {
-                forma.DialogResult = DialogResult.Cancel; return;               
+                forma.DialogResult = DialogResult.Cancel;
+                if (forma.Owner != null)
+                {
+                    forma.Owner.Enabled = true;
+                }
+                return;               
             }
             catch (Exception ex)
             {
                 DialogService.EXCEPTION(ex.Message);
             }
-        }        
-        public Forma getForma()
+        }
+        protected Forma getForma()
         {
             return forma;
         }       

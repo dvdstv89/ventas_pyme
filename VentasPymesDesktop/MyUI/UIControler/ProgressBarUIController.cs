@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 using MyUI.Factories;
 using MyUI.Model;
@@ -8,70 +7,55 @@ using MyUI.UI;
 namespace MyUI.UIControler
 {  
     internal class ProgressBarUIController
-    {             
-        private bool isFormShown;
+    {
         private ProgressBarUI frm;
-        private CancellationTokenSource cancellationTokenSource;
         private MensajeText mensaje;
 
         public ProgressBarUIController(MensajeText mensaje)
-        {   
-            this.isFormShown = false;            
-            this.mensaje= mensaje;          
+        {
+            this.mensaje = mensaje;
+            frm = new ProgressBarUI();
+            SetEstiloForm();
         }
 
         private void SetEstiloForm()
         {
-            FormularioStyleFactory.PROGRESS_BAR(frm, mensaje);            
+            FormularioStyleFactory.PROGRESS_BAR(frm, mensaje);
             LabelStyleFactory.Label_TITLE_MENSAJE(frm.lbEstado, mensaje);
             frm._progressBarCommand.Style = ProgressBarStyle.Marquee;
         }
 
         public void Start()
         {
-            if (!isFormShown)
+            try
             {
-                cancellationTokenSource = new CancellationTokenSource();
-                Task.Run(() => ShowForm(), cancellationTokenSource.Token);
-            }
-            else
-            {
-                frm.Invoke((MethodInvoker)delegate
+                if (Form.ActiveForm != null)
                 {
-                    frm.Show();
-                });
+                    frm.Owner = Form.ActiveForm;
+                    frm.Owner.Enabled = false;
+                }
+                frm.Show();
             }
-        }
-
-        private void ShowForm()
-        {
-            if (!isFormShown)
+            catch (Exception)
             {
-                frm = new ProgressBarUI();
-                SetEstiloForm();
-                frm.Load += (sender, e) =>
-                {
-                    frm.Show();
-                };
-                isFormShown = true;
-                frm.ShowDialog();
-                frm.Dispose();
-
-                isFormShown = false;
-            }
+                throw;
+            }           
         }
 
         public void Stop()
         {
-            if (isFormShown)
+            try
             {
-                cancellationTokenSource?.Cancel();
-                frm.Invoke((MethodInvoker)delegate
+                if (frm.Owner != null)
                 {
-                    frm.Close();
-                });
-                isFormShown = false;
+                    frm.Owner.Enabled = true;
+                }
+                frm.Close();
             }
+            catch (Exception)
+            {
+                throw;
+            }           
         }
     }
 }

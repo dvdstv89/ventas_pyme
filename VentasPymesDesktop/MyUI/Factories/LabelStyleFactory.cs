@@ -12,6 +12,11 @@ namespace MyUI.Factories
             mensaje.showTwoPoints= true;           
             BasicLabel(label, mensaje, ModuleConfig.skin.labelNormalTextColor, ModuleConfig.skin.labelNormalBackColor, ModuleConfig.skin.labelNormalFont);                    
         }
+        public static void Label_FORM_CHARACTER(Label label, MensajeText mensaje)
+        {
+            mensaje.showTwoPoints = false;
+            BasicLabel(label, mensaje, ModuleConfig.skin.labelNormalTextColor, ModuleConfig.skin.labelNormalBackColor, ModuleConfig.skin.labelNormalFont);
+        }
         public static void Label_MENSAJE(Label label, MensajeText mensaje)
         {
             BasicLabel(label, mensaje, ModuleConfig.skin.labelNormalTextColor, ModuleConfig.skin.labelNormalBackColor, ModuleConfig.skin.labelNormalFont);

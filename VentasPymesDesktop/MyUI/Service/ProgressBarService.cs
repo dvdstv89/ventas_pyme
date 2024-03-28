@@ -1,25 +1,74 @@
 ﻿using MyUI.Model;
 using MyUI.UIControler;
+using System;
+using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace MyUI.Service
 {
     public class ProgressBarService
     {
-        ProgressBarUIController progressBar;      
+        private ProgressBarUIController progressBar;     
 
         public ProgressBarService(MensajeText mensaje)
-        {
+        {           
             progressBar = new ProgressBarUIController(mensaje);
         }
 
-        public void start()
-        {            
-            progressBar.Start();
+
+        public Task<T> start<T>(Func<Task<T>> action)
+        {
+            try
+            {
+                progressBar.Start();
+
+                var tcs = new TaskCompletionSource<T>();
+
+                BackgroundWorker worker = new BackgroundWorker();
+                worker.DoWork += (sender, e) =>
+                {
+                    action.Invoke().ContinueWith(task =>
+                    {
+                        if (task.IsFaulted)
+                        {
+                            tcs.SetException(task.Exception.InnerException);
+                        }
+                        else if (task.IsCanceled)
+                        {
+                            tcs.SetCanceled();
+                        }
+                        else
+                        {
+                            tcs.SetResult(task.Result);
+                        }
+                    }, TaskScheduler.Default);
+                };
+
+                worker.RunWorkerCompleted += (sender, e) =>
+                {
+                    progressBar.Stop();
+                };
+
+                worker.RunWorkerAsync();
+
+                return tcs.Task;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void stop()
         {
-            progressBar.Stop();
+            try
+            {
+                progressBar.Stop();
+            }
+            catch (Exception)
+            {
+                throw;
+            }           
         }
     }
 }

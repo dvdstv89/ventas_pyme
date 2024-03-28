@@ -1,10 +1,11 @@
-﻿using NucleoEV.Model;
-using NucleoEV.UIController;
+﻿using ExternalSystem.Service;
+using MyUI.Service;
+using NucleoEV.Model;
+using NucleoEV.Service;
 using System;
 using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
-using MyUI.Enum.Message;
 
 namespace NucleoEV
 {
@@ -18,17 +19,18 @@ namespace NucleoEV
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);            
-            MainUIController form;
-            do
+            Application.SetCompatibleTextRenderingDefault(false);  
+
+            try
             {
                 Session session = new Session(cultureInfo);
-                ProgressBarUIController progressBar = new ProgressBarUIController(LabelText.PROGRESSBAR_CARGANDO);
-                progressBar.MostrarProgresoCircular();               
-                form = new MainUIController(session);
-                progressBar.Close();
-                Application.Run(form.Ejecutar());
-            } while (form.reiniciarAplicacionPorModificacionEnToken);
+                AppService appService = new AppService(session);
+                Application.Run(appService.ejecutarApp());
+            }
+            catch (Exception ex)
+            {
+                DialogService.EXCEPTION(ex.Message);
+            }
         }     
     }
 

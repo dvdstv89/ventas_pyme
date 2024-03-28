@@ -1,20 +1,19 @@
 ﻿using NucleoEV.Model;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using System;
 using NucleoEV.UI;
-using NucleoEV.Tema;
-using NucleoEV.Controller;
-
 using System.Drawing;
-
-using static System.Net.Mime.MediaTypeNames;
-using System.CodeDom;
+using MyUI.Factories;
+using NucleoEV.Message;
+using MyUI.UIControler;
+using NucleoEV.Service;
 
 namespace NucleoEV.UIController
 {
-    internal class MainUIController
+    internal class MainUIController : BaseUIController<MainUI>
     {
+        MainUIService mainUIService;
+
         private const int imagen_inicio = 6;
         private const int imagen_tienda = 9;
         private const int imagen_registro_venta = 7;
@@ -26,31 +25,20 @@ namespace NucleoEV.UIController
         private const int imagen_configuracion = 8;
         private const int imagen_informacion = 2;
 
-
-        MainUI forma = new MainUI();
-        Session session;
-        //Empresa empresa;
-        //SecurityToken securityToken;
-        //List<Complejo> complejos;
-        //Configuracion configuracion;
-        //PeriodoAbierto periodoAbierto;
+      
+        
         object activeForm = null;        
         Button botonActivo=null;
         bool aplicacionEstaAbierta=false;
-
         public bool reiniciarAplicacionPorModificacionEnToken { get; set; }
-        public MainUIController(Session session)
+
+
+        public MainUIController(MainUIService mainUIService, MainUI mainUI) : base(mainUI)
         {
-            try
-            {
-                this.session = session;
-                reiniciarAplicacionPorModificacionEnToken = false;                
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }   
+            this.mainUIService = mainUIService;
+            reiniciarAplicacionPorModificacionEnToken = false;
+        }  
+        
         public MainUI Ejecutar()
         {
             forma.Load += new EventHandler(forma_Load);         
@@ -70,11 +58,11 @@ namespace NucleoEV.UIController
 
             return forma;
         }
-        void forma_Load(object sender, EventArgs e)
+        protected override void forma_Load(object sender, EventArgs e)
         {
             try
             {
-                if (this.session.tokenEsAutentico)
+                if (mainUIService.session.tokenEsAutentico)
                 {
                     //this.empresa = session.empresa;
                     //this.securityToken = VariablesEntorno.securityToken;
@@ -99,12 +87,13 @@ namespace NucleoEV.UIController
             {
                 MessageBox.Show(ex.Message);
             }
-        }          
-        void aplicarTema()
-        {          
-            forma.BackColor = new TemaAplication().inicializarColor(TipoColor.FormBackColor);
-            forma.panelLogo.BackColor = new TemaAplication().inicializarColor(TipoColor.Logo);
-            forma.panelSideMenu.BackColor = new TemaAplication().inicializarColor(TipoColor.LateralMenu);        
+        }
+        protected override void aplicarTema()
+        {
+            FormularioStyleFactory.WINDOWS_FORM(this.forma, TextMensajeNucleo.APP_ABRIENDO);
+          
+            //forma.panelLogo.BackColor = new TemaAplication().inicializarColor(TipoColor.Logo);
+            //forma.panelSideMenu.BackColor = new TemaAplication().inicializarColor(TipoColor.LateralMenu);        
             //session.temaAplication.inicializarBoton(ref forma.btnUsuario, Tema.TipoBoton.Banner);                 
             //session.temaAplication.inicializarBoton(ref forma.btnInicio, Tema.TipoBoton.Menu);
             //session.temaAplication.inicializarBoton(ref forma.btnTiendas, Tema.TipoBoton.Menu);
@@ -122,9 +111,9 @@ namespace NucleoEV.UIController
             //session.temaAplication.inicializarBoton(ref forma.btnMinimizarMenu, Tema.TipoBoton.Menu);
             //session.temaAplication.inicializarBoton(ref forma.btnMaximizarMenu, Tema.TipoBoton.Menu);
          //   session.temaAplication.inicializarBoton(ref forma.btnDepartamentoComercial, Tema.TipoBoton.Menu);
-            forma.FooterBar.BackColor = new TemaAplication().inicializarColor(TipoColor.FooterBarBC);
-            forma.FooterBar.ForeColor = new TemaAplication().inicializarColor(TipoColor.FooterBarFC);
-            forma.panelBanner.BackColor = new TemaAplication().inicializarColor(TipoColor.PanelBannerBC);
+            //forma.FooterBar.BackColor = new TemaAplication().inicializarColor(TipoColor.FooterBarBC);
+            //forma.FooterBar.ForeColor = new TemaAplication().inicializarColor(TipoColor.FooterBarFC);
+            //forma.panelBanner.BackColor = new TemaAplication().inicializarColor(TipoColor.PanelBannerBC);
 
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(forma.btnInicio, "Inicio");
@@ -560,8 +549,8 @@ namespace NucleoEV.UIController
             forma.imageTile.Image = forma.iconosList.Images[idImagen];
             //forma.imageTile.Image.
             forma.lbHeaderTitle.Text= text;
-            forma.lbHeaderTitle.Font = new TemaAplication().inicializarTexto(TipoTexto.MigasPanFont);
-            forma.lbHeaderTitle.ForeColor = new TemaAplication().inicializarColor(TipoColor.ButtonFontColorLigth);
+            //forma.lbHeaderTitle.Font = new TemaAplication().inicializarTexto(TipoTexto.MigasPanFont);
+            //forma.lbHeaderTitle.ForeColor = new TemaAplication().inicializarColor(TipoColor.ButtonFontColorLigth);
         }
         public void reiniciarFormulario()
         {
@@ -584,11 +573,11 @@ namespace NucleoEV.UIController
         {
             //quitar boton activo
             if (botonActivo != null)
-                botonActivo.BackColor = new TemaAplication().inicializarColor(TipoColor.LateralMenu);          
+                //botonActivo.BackColor = new TemaAplication().inicializarColor(TipoColor.LateralMenu);          
             botonActivo = button;
             //activar nuevo activo
-            if (botonActivo != null)
-                botonActivo.BackColor = new TemaAplication().inicializarColor(TipoColor.ToolStripButtonActivo);          
+            //if (botonActivo != null)
+                //botonActivo.BackColor = new TemaAplication().inicializarColor(TipoColor.ToolStripButtonActivo);          
         }
         public void ocultarVentanaPrincipal()
         {

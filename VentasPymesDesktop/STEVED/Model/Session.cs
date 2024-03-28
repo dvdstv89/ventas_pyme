@@ -18,8 +18,6 @@ namespace NucleoEV.Model
             this.tokenEsAutentico = true;          
             this.skin = SkinFactory.CARACOL_SKIN();
             idioma = Idioma.SPANISH;
-
-        } 
-       
+        }        
     }
 }

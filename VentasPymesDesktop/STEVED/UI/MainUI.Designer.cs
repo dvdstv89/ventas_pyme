@@ -93,7 +93,7 @@
             this.panelSideMenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSideMenu.Location = new System.Drawing.Point(0, 0);
             this.panelSideMenu.Name = "panelSideMenu";
-            this.panelSideMenu.Size = new System.Drawing.Size(250, 829);
+            this.panelSideMenu.Size = new System.Drawing.Size(250, 589);
             this.panelSideMenu.TabIndex = 0;
             // 
             // btnMaximizarMenu
@@ -102,7 +102,7 @@
             this.btnMaximizarMenu.FlatAppearance.BorderSize = 0;
             this.btnMaximizarMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMaximizarMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximizarMenu.Image")));
-            this.btnMaximizarMenu.Location = new System.Drawing.Point(0, 739);
+            this.btnMaximizarMenu.Location = new System.Drawing.Point(0, 499);
             this.btnMaximizarMenu.Name = "btnMaximizarMenu";
             this.btnMaximizarMenu.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMaximizarMenu.Size = new System.Drawing.Size(250, 45);
@@ -116,7 +116,7 @@
             this.btnMinimizarMenu.FlatAppearance.BorderSize = 0;
             this.btnMinimizarMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMinimizarMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimizarMenu.Image")));
-            this.btnMinimizarMenu.Location = new System.Drawing.Point(0, 784);
+            this.btnMinimizarMenu.Location = new System.Drawing.Point(0, 544);
             this.btnMinimizarMenu.Name = "btnMinimizarMenu";
             this.btnMinimizarMenu.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
             this.btnMinimizarMenu.Size = new System.Drawing.Size(250, 45);
@@ -283,7 +283,7 @@
             this.panelBanner.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelBanner.Location = new System.Drawing.Point(0, 0);
             this.panelBanner.Name = "panelBanner";
-            this.panelBanner.Size = new System.Drawing.Size(1469, 62);
+            this.panelBanner.Size = new System.Drawing.Size(984, 62);
             this.panelBanner.TabIndex = 1;
             // 
             // tableLayoutPanel1
@@ -337,7 +337,6 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(11, 4);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -353,7 +352,7 @@
             this.btnUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUsuario.Image = ((System.Drawing.Image)(resources.GetObject("btnUsuario.Image")));
             this.btnUsuario.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUsuario.Location = new System.Drawing.Point(1349, 0);
+            this.btnUsuario.Location = new System.Drawing.Point(864, 0);
             this.btnUsuario.Name = "btnUsuario";
             this.btnUsuario.Size = new System.Drawing.Size(120, 62);
             this.btnUsuario.TabIndex = 2;
@@ -367,9 +366,9 @@
             this.panelFooter.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.panelFooter.Controls.Add(this.FooterBar);
             this.panelFooter.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelFooter.Location = new System.Drawing.Point(0, 891);
+            this.panelFooter.Location = new System.Drawing.Point(0, 651);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(1469, 30);
+            this.panelFooter.Size = new System.Drawing.Size(984, 30);
             this.panelFooter.TabIndex = 2;
             // 
             // FooterBar
@@ -390,7 +389,7 @@
             this.FooterBar.Location = new System.Drawing.Point(0, 0);
             this.FooterBar.Name = "FooterBar";
             this.FooterBar.Padding = new System.Windows.Forms.Padding(1, 0, 11, 0);
-            this.FooterBar.Size = new System.Drawing.Size(1469, 30);
+            this.FooterBar.Size = new System.Drawing.Size(984, 30);
             this.FooterBar.TabIndex = 1;
             this.FooterBar.Text = "FooterBar";
             // 
@@ -451,7 +450,7 @@
             this.panelParent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelParent.Location = new System.Drawing.Point(250, 0);
             this.panelParent.Name = "panelParent";
-            this.panelParent.Size = new System.Drawing.Size(1219, 829);
+            this.panelParent.Size = new System.Drawing.Size(734, 589);
             this.panelParent.TabIndex = 3;
             // 
             // panel1
@@ -461,7 +460,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 62);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1469, 829);
+            this.panel1.Size = new System.Drawing.Size(984, 589);
             this.panel1.TabIndex = 4;
             // 
             // iconosList
@@ -483,13 +482,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1469, 921);
+            this.ClientSize = new System.Drawing.Size(984, 681);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.panelBanner);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(1485, 720);
+            this.MinimumSize = new System.Drawing.Size(1000, 720);
             this.Name = "MainUI";
             this.Text = "Portal de Usuario Caracol Vedado";
             this.panelSideMenu.ResumeLayout(false);

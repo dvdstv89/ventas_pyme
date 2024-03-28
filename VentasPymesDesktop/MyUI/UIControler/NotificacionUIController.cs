@@ -21,9 +21,15 @@ namespace MyUI.UIControler
             forma.btnCancelar.Click += new EventHandler(btnCancelar_Click);
             forma.btnCancelarOculto.Click += new EventHandler(btnCancelar_Click);
             forma.btnAceptar.Click += new EventHandler(btnAceptar_Click);
+
+            if (Form.ActiveForm != null)
+            {
+                forma.Owner = Form.ActiveForm;
+                forma.Owner.Enabled = false;
+            }          
             return forma;
         }
-        public override void aplicarTema()
+        protected override void aplicarTema()
         {
             if(notificacion.tipoMensaje != Enum.MensajeType.Confirmation)
             {                
@@ -42,7 +48,12 @@ namespace MyUI.UIControler
         {
             try
             {
-                forma.DialogResult = DialogResult.OK; return;
+                forma.DialogResult = DialogResult.OK;
+                if (forma.Owner != null)
+                {
+                    forma.Owner.Enabled = true;
+                }
+                return;
             }
             catch (Exception ex)
             {

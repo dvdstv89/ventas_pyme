@@ -1,42 +1,84 @@
-﻿using ExternalSystem.Model;
+﻿using ExternalSystem.LocalService;
 using ExternalSystem.UI;
 using ExternalSystem.UIController;
-using System.Text;
+using MyUI.Service;
+using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using ventasPymesClient;
+using ventasPymesClient.Dto;
+using ventasPymesClient.Service;
 
 namespace ExternalSystem.Service
 {
     public class ExternalSystemService
     {
-        private ApiRest apiRest;
-        private readonly FicheroService<ApiRest> ficheroService;
+        private readonly FicheroService<ServerRestInfoToSaveDTO> ficheroService;
         private readonly ApiRestService apiRestService;
+        private readonly TaskManagerService taskManagerService;
 
         public ExternalSystemService()
         {
-            this.apiRest = new ApiRest();
-            ficheroService = new FicheroService<ApiRest>();
-            apiRestService = new ApiRestService(ficheroService, apiRest);
-            apiRestService.CargarConfiguracionApiRest();
+            ficheroService = new FicheroService<ServerRestInfoToSaveDTO>();
+            ServerRestInfoToSaveDTO serverRestInfo = ficheroService.AbrirFichero();
+            taskManagerService = new TaskManagerService(serverRestInfo);
+            apiRestService = new ApiRestService(ficheroService, taskManagerService);
         }
 
-        public void gestionarExternalApiRest()
-        {            
-            gestionarrApiRest().ShowDialog();
-        }
-
-        internal Form gestionarrApiRest()
-        {  
-            var apiRestUI = new ApiRestUI();
-            var apiRestController = new ApiRestController(apiRestService, apiRestUI);
-            return apiRestController.ejecutar();
-        }
-
-        public string getApiRestConection(string restPoint)
+        public async Task<bool> probarServicioRestAsync()
         {
-            StringBuilder builder= new StringBuilder();
-            builder.Append(apiRest.uri).Append(restPoint).Append(apiRest.token);
-            return builder.ToString();
+            try
+            {
+                return await apiRestService.AutoProbarApiRest();
+            }
+            catch (Exception ex)
+            {
+                DialogService.EXCEPTION(ex.Message);
+                return false;
+            }       
         }
+
+        public bool verificarFicheroConfiguracion()
+        {
+            try
+            {
+                if (!VentasPymesClientMetadata.serverRestInfo.apiRestHasInformation())
+                {                   
+                    return gestionarExternalApiRest();
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }           
+        }
+
+        private bool gestionarExternalApiRest()
+        {
+            try
+            {
+                DialogResult dialogResult = gestionarApiRest().ShowDialog();
+                return dialogResult == DialogResult.OK;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private Form gestionarApiRest()
+        {
+            try
+            {
+                var apiRestUI = new ApiRestUI();
+                var apiRestController = new ApiRestController(apiRestService, apiRestUI);
+                return apiRestController.ejecutar();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }        
     }
 }

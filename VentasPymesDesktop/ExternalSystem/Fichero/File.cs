@@ -5,51 +5,67 @@ using System.Runtime.Serialization.Formatters.Binary;
 namespace ExternalSystem.Fichero
 {
     internal class File
-    {      
-        public Stream file { get; set; }
+    {  
         public string path { get; set; }
         public File(string fileName = "config")
         {
             this.path = Environment.CurrentDirectory + "\\"+ fileName;
         }
-
-        public void CrearFichero()
-        {
-            Stream file = System.IO.File.Create(path);
-            file.Close();
-        }
-
+         
         public bool ExisteFichero()
         {
-            return (System.IO.File.Exists(path)) ? true : false;
+            try
+            {
+                return (System.IO.File.Exists(path)) ? true : false;
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
         }
 
         public void EliminarFichero()
         {
-            System.IO.File.Delete(path);
+            try
+            {
+                System.IO.File.Delete(path);
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
         }
 
-        public Object LeerFichero()
+        public object LeerFichero()
         {
-            file = System.IO.File.Open(path, FileMode.OpenOrCreate);
-            var binfor = new BinaryFormatter();
-            Object objeto = binfor.Deserialize(file);
-            CerrarFile();
-            return objeto;
-        }
-
-        public void CerrarFile()
-        {
-            file.Close();
+            try
+            {
+                using (var file = System.IO.File.Open(path, FileMode.OpenOrCreate))
+                {
+                    var binfor = new BinaryFormatter();
+                    object objeto = binfor.Deserialize(file);
+                    return objeto;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void GuardarFichero(Object datos)
-        {
-            if (!ExisteFichero()) CrearFichero();
-            var binfor = new BinaryFormatter();
-            file = System.IO.File.Open(path, FileMode.Open);
-            binfor.Serialize(file, datos);
-            CerrarFile();
-        }
+        {           
+            try
+            {               
+                var binfor = new BinaryFormatter();
+                var file = System.IO.File.Open(path, FileMode.Create);
+                binfor.Serialize(file, datos);
+                file.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }                  
+        }       
     }
 }

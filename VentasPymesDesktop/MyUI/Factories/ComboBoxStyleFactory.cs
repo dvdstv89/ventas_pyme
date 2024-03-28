@@ -22,7 +22,8 @@ namespace MyUI.Factories
             comboBoxComponent.backColor = ModuleConfig.skin.comboBoxBackColor;
             comboBoxComponent.font = ModuleConfig.skin.comboBoxFont;
             comboBoxComponent.padding = ModuleConfig.skin.comboBoxPadding;
-            comboBoxComponent.size = ModuleConfig.skin.comboBoxBoxSize;
+            comboBoxComponent.size = comboBox.Size;
+            // comboBoxComponent.size = ModuleConfig.skin.comboBoxBoxSize;
             comboBoxComponent.dropDownStyle = ModuleConfig.skin.comboBoxDropDownSyle;
             comboBoxComponent.enable = enable;
             comboBoxComponent.applyStyle();           

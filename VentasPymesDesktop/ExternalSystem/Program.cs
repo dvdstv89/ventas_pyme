@@ -1,4 +1,5 @@
-﻿using ExternalSystem.Service;
+﻿using ExternalSystem.LocalService;
+using MyUI.Service;
 using System;
 using System.Windows.Forms;
 
@@ -11,7 +12,14 @@ namespace ExternalSystem
         {                 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ExternalSystemService().gestionarrApiRest());
+            try
+            {
+                Application.Run(new ExternalSystemService().gestionarApiRest());
+            }
+            catch (Exception ex)
+            {
+                DialogService.EXCEPTION(ex.Message);
+            }
         }
     }
 }

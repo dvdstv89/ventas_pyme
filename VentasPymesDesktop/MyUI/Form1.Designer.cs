@@ -36,7 +36,6 @@
             this.iconButtonSucess = new FontAwesome.Sharp.IconButton();
             this.iconButtonException = new FontAwesome.Sharp.IconButton();
             this.iconButtonConfirmation = new FontAwesome.Sharp.IconButton();
-            this.iconButtonProgressBarStop = new FontAwesome.Sharp.IconButton();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -89,13 +88,12 @@
             this.iconButtonProgressBar.IconChar = FontAwesome.Sharp.IconChar.None;
             this.iconButtonProgressBar.IconColor = System.Drawing.Color.Black;
             this.iconButtonProgressBar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButtonProgressBar.Location = new System.Drawing.Point(278, 42);
+            this.iconButtonProgressBar.Location = new System.Drawing.Point(278, 71);
             this.iconButtonProgressBar.Name = "iconButtonProgressBar";
             this.iconButtonProgressBar.Size = new System.Drawing.Size(75, 52);
             this.iconButtonProgressBar.TabIndex = 8;
-            this.iconButtonProgressBar.Text = "ProgressBar Start";
+            this.iconButtonProgressBar.Text = "Probar ProgressBar";
             this.iconButtonProgressBar.UseVisualStyleBackColor = true;
-            this.iconButtonProgressBar.Click += new System.EventHandler(this.iconButtonProgressBar_Click);
             // 
             // iconButtonMensajeError
             // 
@@ -149,26 +147,12 @@
             this.iconButtonConfirmation.UseVisualStyleBackColor = true;
             this.iconButtonConfirmation.Click += new System.EventHandler(this.iconButtonConfirmation_Click);
             // 
-            // iconButtonProgressBarStop
-            // 
-            this.iconButtonProgressBarStop.IconChar = FontAwesome.Sharp.IconChar.None;
-            this.iconButtonProgressBarStop.IconColor = System.Drawing.Color.Black;
-            this.iconButtonProgressBarStop.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButtonProgressBarStop.Location = new System.Drawing.Point(278, 100);
-            this.iconButtonProgressBarStop.Name = "iconButtonProgressBarStop";
-            this.iconButtonProgressBarStop.Size = new System.Drawing.Size(75, 52);
-            this.iconButtonProgressBarStop.TabIndex = 13;
-            this.iconButtonProgressBarStop.Text = "ProgressBar Stop";
-            this.iconButtonProgressBarStop.UseVisualStyleBackColor = true;
-            this.iconButtonProgressBarStop.Click += new System.EventHandler(this.iconButtonProgressBarStop_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(365, 224);
-            this.Controls.Add(this.iconButtonProgressBarStop);
             this.Controls.Add(this.iconButtonConfirmation);
             this.Controls.Add(this.iconButtonException);
             this.Controls.Add(this.iconButtonSucess);
@@ -192,12 +176,11 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
         public System.Windows.Forms.Label labelVersion;
         public System.Windows.Forms.Label labelTitle;
-        private FontAwesome.Sharp.IconButton iconButtonProgressBar;
         private FontAwesome.Sharp.IconButton iconButtonMensajeError;
         private FontAwesome.Sharp.IconButton iconButtonSucess;
         private FontAwesome.Sharp.IconButton iconButtonException;
         private FontAwesome.Sharp.IconButton iconButtonConfirmation;
-        private FontAwesome.Sharp.IconButton iconButtonProgressBarStop;
+        public FontAwesome.Sharp.IconButton iconButtonProgressBar;
     }
 }
 

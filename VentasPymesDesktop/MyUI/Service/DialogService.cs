@@ -1,6 +1,7 @@
 ﻿using MyUI.Model;
 using MyUI.UI;
 using MyUI.UIControler;
+using System;
 using System.Windows.Forms;
 
 namespace MyUI.Service
@@ -17,27 +18,49 @@ namespace MyUI.Service
 
         public static void ERROR(MensajeText mensaje)
         {
-            var errorMessage = new MensajeError(mensaje);
-            var notificacionUI = new NotificationUI();
-            var controller = new NotificacionUIController(notificacionUI, errorMessage);
-            controller.ejecutar().ShowDialog();
+            try
+            {
+                var errorMessage = new MensajeError(mensaje);
+                var notificacionUI = new NotificationUI();
+                var controller = new NotificacionUIController(notificacionUI, errorMessage);
+                controller.ejecutar().ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                EXCEPTION(ex.Message);
+            }
         }
 
         public static void SUCCESS(MensajeText mensaje)
         {
-            var successMessage = new MensajeSuccess(mensaje);
-            var notificacionUI = new NotificationUI();
-            var controller = new NotificacionUIController(notificacionUI, successMessage);
-            controller.ejecutar().ShowDialog();
+            try
+            {
+                var successMessage = new MensajeSuccess(mensaje);
+                var notificacionUI = new NotificationUI();
+                var controller = new NotificacionUIController(notificacionUI, successMessage);
+                controller.ejecutar().ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                EXCEPTION(ex.Message);
+            }
         }
 
         public static bool CONFIRMATION(MensajeText mensaje)
         {
-            var confirmationMessage = new MensajeConfirmation(mensaje);
-            var notificacionUI = new NotificationUI();
-            var controller = new NotificacionUIController(notificacionUI, confirmationMessage);
-            DialogResult dialogResult = controller.ejecutar().ShowDialog();
-            return dialogResult == DialogResult.OK ? true : false;
+            try
+            {
+                var confirmationMessage = new MensajeConfirmation(mensaje);
+                var notificacionUI = new NotificationUI();
+                var controller = new NotificacionUIController(notificacionUI, confirmationMessage);
+                DialogResult dialogResult = controller.ejecutar().ShowDialog();
+                return dialogResult == DialogResult.OK ? true : false;
+            }
+            catch (Exception ex)
+            {
+                EXCEPTION(ex.Message);
+                return false;
+            }
         }
     }
 }

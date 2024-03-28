@@ -7,13 +7,11 @@ namespace MyUI
 {
     public partial class Form1 : Form
     {
-        ModuleConfigService moduleConfigService;
-        ProgressBarService progressBarService;
-
+        ModuleConfigService moduleConfigService;      
         public Form1()
         {
             InitializeComponent();
-            progressBarService = new ProgressBarService(TextMensaje.PROGRESSBAR_CARGANDO);
+           
             moduleConfigService = new ModuleConfigService();           
         }
 
@@ -21,16 +19,7 @@ namespace MyUI
         {
                     
         }
-
-        private void iconButtonProgressBar_Click(object sender, EventArgs e)
-        {
-            progressBarService.start();
-        }
-
-        private void iconButtonProgressBarStop_Click(object sender, EventArgs e)
-        {
-            progressBarService.stop();
-        }
+      
 
         private void iconButtonMensajeError_Click(object sender, EventArgs e)
         {
