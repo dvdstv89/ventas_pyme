@@ -1,0 +1,12 @@
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net7.0\ventasPymesClient.deps.json
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net7.0\ventasPymesClient.dll
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net7.0\ventasPymesClient.pdb
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net7.0\ventasPymesClient.csproj.AssemblyReference.cache
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net7.0\ventasPymesClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net7.0\ventasPymesClient.AssemblyInfoInputs.cache
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net7.0\ventasPymesClient.AssemblyInfo.cs
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net7.0\ventasPymesClient.csproj.CoreCompileInputs.cache
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net7.0\ventasPymesClient.dll
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net7.0\refint\ventasPymesClient.dll
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net7.0\ventasPymesClient.pdb
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net7.0\ref\ventasPymesClient.dll

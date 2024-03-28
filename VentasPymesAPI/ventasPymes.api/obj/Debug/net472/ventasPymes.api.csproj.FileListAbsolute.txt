@@ -1,0 +1,7 @@
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymes.api\obj\Debug\net472\ventasPymes.api.csproj.AssemblyReference.cache
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymes.api\obj\Debug\net472\ventasPymes.api.csproj.SuggestedBindingRedirects.cache
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymes.api\obj\Debug\net472\ventasPymes.api.exe.config
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymes.api\obj\Debug\net472\ventasPymes.api.GeneratedMSBuildEditorConfig.editorconfig
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymes.api\obj\Debug\net472\ventasPymes.api.AssemblyInfoInputs.cache
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymes.api\obj\Debug\net472\ventasPymes.api.AssemblyInfo.cs
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymes.api\obj\Debug\net472\ventasPymes.api.csproj.CoreCompileInputs.cache
