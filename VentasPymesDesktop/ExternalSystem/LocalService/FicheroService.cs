@@ -25,12 +25,13 @@ namespace ExternalSystem.LocalService
                 return default;
             }
         }
-        public void GuardarFichero(Tipo model)
+        public FileSaveResult GuardarFichero(Tipo model)
         {
             try
-            {               
-                fichero.GuardarFichero(model);
+            {
+                FileSaveResult result = fichero.GuardarFichero(model);
                 DialogService.SUCCESS(TextMensaje.FICHERO_GUARDADO);
+                return result;
             }
             catch (Exception)
             {               

@@ -1,4 +1,5 @@
-﻿using ExternalSystem.LocalService;
+﻿using ExternalSystem.Fichero;
+using ExternalSystem.Message;
 using ExternalSystem.UI;
 using ExternalSystem.UIController;
 using MyUI.Service;
@@ -6,47 +7,23 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ventasPymesClient;
-using ventasPymesClient.Dto;
-using ventasPymesClient.Service;
 
 namespace ExternalSystem.Service
 {
     public class ExternalSystemService
-    {
-        private readonly FicheroService<ServerRestInfoToSaveDTO> ficheroService;
-        private readonly ApiRestService apiRestService;
-        private readonly TaskManagerService taskManagerService;
+    {       
+        private readonly ApiRestService apiRestService;        
 
         public ExternalSystemService()
-        {
-            ficheroService = new FicheroService<ServerRestInfoToSaveDTO>();
-            ServerRestInfoToSaveDTO serverRestInfo = ficheroService.AbrirFichero();
-            taskManagerService = new TaskManagerService(serverRestInfo);
-            apiRestService = new ApiRestService(ficheroService, taskManagerService);
-        }
+        {           
+            apiRestService = new ApiRestService();
+        }       
 
-        public async Task<bool> probarServicioRestAsync()
+        public async Task<FileSaveResult> verificarFicheroConfiguracionAsync()
         {
             try
             {
-                return await apiRestService.AutoProbarApiRest();
-            }
-            catch (Exception ex)
-            {
-                DialogService.EXCEPTION(ex.Message);
-                return false;
-            }       
-        }
-
-        public bool verificarFicheroConfiguracion()
-        {
-            try
-            {
-                if (!VentasPymesClientMetadata.serverRestInfo.apiRestHasInformation())
-                {                   
-                    return gestionarExternalApiRest();
-                }
-                return true;
+                return !VentasPymesClientMetadata.serverRestInfo.apiRestHasInformation() ? await gestionarExternalApiRestAsync() : FileSaveResult.SKIP;               
             }
             catch (Exception)
             {
@@ -54,31 +31,42 @@ namespace ExternalSystem.Service
             }           
         }
 
-        private bool gestionarExternalApiRest()
-        {
+        public async Task<bool> probarServicioRestAsync()
+        {           
             try
-            {
-                DialogResult dialogResult = gestionarApiRest().ShowDialog();
-                return dialogResult == DialogResult.OK;
+            {            
+                return await apiRestService.ProbarApiRest(ventasPymesClient.VentasPymesClientMetadata.serverRestInfo);  
             }
             catch (Exception)
-            {
-                throw;
-            }
+            {             
+                return false;                
+            }                   
         }
 
-        private Form gestionarApiRest()
+        public async Task<FileSaveResult> TryRepairConexionAsync()
         {
             try
             {
-                var apiRestUI = new ApiRestUI();
-                var apiRestController = new ApiRestController(apiRestService, apiRestUI);
-                return apiRestController.ejecutar();
+                return DialogService.CONFIRMATION(TextMensaje.CONFIRMAR_CONFIGURAR_CONEXION_SERVIDOR) ? await gestionarExternalApiRestAsync() : FileSaveResult.ERROR;
             }
             catch (Exception)
             {
                 throw;
+            }                           
+        }
+
+        private async Task<FileSaveResult> gestionarExternalApiRestAsync()
+        {
+            try
+            {
+                var apiRestController = new ApiRestController(apiRestService, new ApiRestUI());
+                apiRestController.ejecutar().ShowDialog();
+                return apiRestController.ficheroCreado;
             }
-        }        
+            catch (Exception)
+            {
+                throw;               
+            }
+        }
     }
 }

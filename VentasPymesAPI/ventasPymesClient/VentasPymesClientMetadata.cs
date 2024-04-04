@@ -10,7 +10,7 @@ namespace ventasPymesClient
         internal static ServerRest serverRest = null;        
         internal static bool isMetadataInicializada = false;
         
-        internal static void initMetadata(ServerRestInfoToSaveDTO serverRestInfoToSaveDTO)
+        public static void initMetadata(ServerRestInfoToSaveDTO serverRestInfoToSaveDTO)
         {
             if(serverRestInfoToSaveDTO == null)
                 serverRestInfoToSaveDTO = new ServerRestInfoToSaveDTO();

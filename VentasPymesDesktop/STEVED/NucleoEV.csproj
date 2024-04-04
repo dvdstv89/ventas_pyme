@@ -90,7 +90,6 @@
     <Compile Include="Service\EmpresaService.cs" />
     <Compile Include="Service\AppService.cs" />
     <Compile Include="Service\MainUIService.cs" />
-    <Compile Include="TODO.cs" />
     <Compile Include="UIController\BaseUIController.cs" />
     <Compile Include="UIController\IController.cs" />
     <Compile Include="UIController\MainUIController.cs" />

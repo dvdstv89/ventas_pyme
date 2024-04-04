@@ -1,54 +1,39 @@
 ﻿using System;
 using System.Threading.Tasks;
+using ExternalSystem.Fichero;
 using ExternalSystem.LocalService;
-using MyUI.Service;
 using ventasPymesClient;
 using ventasPymesClient.Dto;
 using ventasPymesClient.Service;
 
 namespace ExternalSystem.Service
 {
-    public class ApiRestService
+    public class ApiRestService : BaseService
     {            
-        private readonly FicheroService<ServerRestInfoToSaveDTO> ficheroService;
-        private readonly StatusService statusService;       
-        private readonly TaskManagerService taskManagerService;
+        private readonly FicheroService<ServerRestInfoToSaveDTO> ficheroService;       
 
-        public ApiRestService(FicheroService<ServerRestInfoToSaveDTO> ficheroService, TaskManagerService taskManagerService)
+        public ApiRestService()
         {
-            this.ficheroService = ficheroService;
-            this.taskManagerService = taskManagerService;
-            this.statusService = new StatusService();           
+            this.ficheroService = new FicheroService<ServerRestInfoToSaveDTO>();            
+            VentasPymesClientMetadata.initMetadata(ficheroService.AbrirFichero());
         }
 
         internal async Task<bool> ProbarApiRest(ServerRestInfoToSaveDTO apiRestToTest)
         {            
             try
-            {
-                StatusService statusServiceTest = new StatusService(apiRestToTest);
-                taskManagerService.EjecutarServidorApiRest();
-                var progressBarService = new ProgressBarService(MyUI.Enum.Message.TextMensaje.CHECK_CONEXION);
-                return await progressBarService.start(() => statusServiceTest.getStatusAsync());
+            {      
+                new TaskManagerService(apiRestToTest).EjecutarServidorApiRest();
+                var statusService = new StatusService(apiRestToTest);
+                return await ejecutarEndpoint<bool>(MyUI.Enum.Message.TextMensaje.CHECK_CONEXION, () => statusService.getStatusAsync());
             }
             catch (Exception) { throw; }
-        }
+        } 
 
-        internal async Task<bool> AutoProbarApiRest()
-        {         
-            try
-            {
-                taskManagerService.EjecutarServidorApiRest();
-                var progressBarService = new ProgressBarService(MyUI.Enum.Message.TextMensaje.CHECK_CONEXION);
-                return await progressBarService.start(() => statusService.getStatusAsync());
-            }
-            catch (Exception) { throw; }
-        }
-
-        internal void GuardarApiRest()
+        internal FileSaveResult GuardarApiRest()
         {
             try
             {
-                ficheroService.GuardarFichero(VentasPymesClientMetadata.serverRestInfo);
+                return ficheroService.GuardarFichero(VentasPymesClientMetadata.serverRestInfo);
             }
             catch (Exception) { throw; }
         }       

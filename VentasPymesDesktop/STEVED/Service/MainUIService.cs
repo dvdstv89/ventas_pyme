@@ -8,7 +8,7 @@ namespace NucleoEV.Service
 
         public MainUIService(Session session)
         {
-            this.session = session;
+            this.session = session;               
         }
     }
 }

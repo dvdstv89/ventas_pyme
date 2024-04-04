@@ -1,70 +1,69 @@
 ﻿using ExternalSystem.Service;
 using NucleoEV.Model;
-using NucleoEV.UI;
-using NucleoEV.UIController;
 using System.Windows.Forms;
 using System;
-using NucleoEV.Message;
+using System.Globalization;
+using System.Threading.Tasks;
 using MyUI.Service;
+using NucleoEV.UIController;
+using NucleoEV.UI;
+using ExternalSystem.Fichero;
 
 namespace NucleoEV.Service
 {
     internal class AppService
-    {      
-        Session session;
+    {
+        internal FileSaveResult ficheroStatus { get; set; }
+        Session session;       
         readonly ExternalSystemService externalSystem;
         readonly EmpresaService empresaService;
+        readonly MainUIService mainUIService;
+        readonly MainUIController mainUIController;
+        private readonly MainUI mainUI;
 
-        public AppService(Session session)
+        public AppService(CultureInfo cultureInfo)
         {
-           this.session = session;         
-           this.externalSystem = new ExternalSystemService();
-            this.empresaService = new EmpresaService();
+            ficheroStatus = FileSaveResult.SKIP;
+           this.session = new Session(cultureInfo);
+           this.externalSystem = new ExternalSystemService();              
+           this.empresaService = new EmpresaService();
+
+           this.mainUI = new MainUI();
+           this.mainUIService = new MainUIService(session);
+           this.mainUIController = new MainUIController(mainUIService, mainUI);
         }
 
-        internal Form ejecutarApp()
+        public Form ejecutarApp()
+        {
+            _ = ejecutarAppAsync().ConfigureAwait(false);
+            return null;
+        }
+
+        private async Task ejecutarAppAsync()
         {
             try
             {
-                verificarFicheroConfiguracion();
-                probarServicioRest();
+                ficheroStatus = await externalSystem.verificarFicheroConfiguracionAsync();               
 
-                //abrir selector de empresa
-                empresaService.buscarEmpresa();
-
-                return abrirFormularioPrincipal();
+                bool conexionEstablecida = await externalSystem.probarServicioRestAsync();
+                if (!conexionEstablecida && ficheroStatus != FileSaveResult.CANCEL)
+                {
+                    conexionEstablecida = (await externalSystem.TryRepairConexionAsync() == FileSaveResult.OVERRIDED) ? true : false;
+                }
+                if (conexionEstablecida)
+                {
+                    empresaService.buscarEmpresa();
+                    mainUIController.Ejecutar().ShowDialog();
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;           
-            }            
-        }
-
-        internal Form abrirFormularioPrincipal()
-        {
-            var mainUI = new MainUI();
-            var mainUIService = new MainUIService(session);
-            var mainUIController = new MainUIController(mainUIService, mainUI);
-            return mainUIController.Ejecutar();
-        }
-
-        internal void verificarFicheroConfiguracion()
-        {
-            bool isFicheroCorrecto = externalSystem.verificarFicheroConfiguracion();
-            if (isFicheroCorrecto == false) 
-            { 
-                throw new Exception(TextMensajeNucleo.METADADOS_INCORRECTOS.ToString());                
-            }           
-        }
-
-        internal async void probarServicioRest()
-        {
-            bool existConexion = await externalSystem.probarServicioRestAsync();
-            if (existConexion == false)
+                DialogService.EXCEPTION(ex.Message);               
+            }
+            finally
             {
-                DialogService.ERROR(TextMensajeNucleo.VERIFICANDO_CONEXION_SERVIDOR_ERROR);
-                verificarFicheroConfiguracion();
-            }            
-        }
+                Application.Exit();
+            }
+        }      
     }
 }

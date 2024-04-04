@@ -3,23 +3,16 @@ using ExternalSystem.UI;
 using ExternalSystem.UIController;
 using System;
 using System.Windows.Forms;
-using ventasPymesClient.Dto;
-using ventasPymesClient.Service;
 
 namespace ExternalSystem.LocalService
 {
     internal class ExternalSystemService
-    {        
-        private readonly FicheroService<ServerRestInfoToSaveDTO> ficheroService;
-        private readonly ApiRestService apiRestService;
-        private readonly TaskManagerService taskManagerService;
+    {       
+        private readonly ApiRestService apiRestService;       
 
         public ExternalSystemService()
-        {            
-            ficheroService = new FicheroService<ServerRestInfoToSaveDTO>();
-            ServerRestInfoToSaveDTO serverRestInfo = ficheroService.AbrirFichero();
-            taskManagerService = new TaskManagerService(serverRestInfo);
-            apiRestService = new ApiRestService(ficheroService, taskManagerService);
+        {         
+            apiRestService = new ApiRestService();
         }          
 
         internal Form gestionarApiRest()

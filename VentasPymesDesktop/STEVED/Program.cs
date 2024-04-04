@@ -1,7 +1,4 @@
-﻿using ExternalSystem.Service;
-using MyUI.Service;
-using NucleoEV.Model;
-using NucleoEV.Service;
+﻿using NucleoEV.Service;
 using System;
 using System.Globalization;
 using System.Threading;
@@ -11,26 +8,22 @@ namespace NucleoEV
 {
     static class Program
     {
+        private static CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             CultureInfo cultureInfo = new CultureInfo("es-ES");           
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
 
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);  
-
-            try
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.ApplicationExit += (sender, e) =>
             {
-                Session session = new Session(cultureInfo);
-                AppService appService = new AppService(session);
-                Application.Run(appService.ejecutarApp());
-            }
-            catch (Exception ex)
-            {
-                DialogService.EXCEPTION(ex.Message);
-            }
+                cancellationTokenSource.Cancel();
+            };
+            AppService appService = new AppService(cultureInfo);
+            Application.Run(appService.ejecutarApp());                       
         }     
     }
 

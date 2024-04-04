@@ -28,7 +28,7 @@ namespace ventasPymesClient.Service
             catch (Exception)
             {
                 throw;
-            }
+            }           
         }
     }
 }

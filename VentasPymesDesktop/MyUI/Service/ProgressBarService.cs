@@ -15,8 +15,7 @@ namespace MyUI.Service
             progressBar = new ProgressBarUIController(mensaje);
         }
 
-
-        public Task<T> start<T>(Func<Task<T>> action)
+        public Task<T> run<T>(Func<Task<T>> action)
         {
             try
             {
@@ -31,7 +30,7 @@ namespace MyUI.Service
                     {
                         if (task.IsFaulted)
                         {
-                            tcs.SetException(task.Exception.InnerException);
+                            tcs.SetException(task.Exception.InnerException);                            
                         }
                         else if (task.IsCanceled)
                         {
@@ -57,18 +56,6 @@ namespace MyUI.Service
             {
                 throw;
             }
-        }
-
-        public void stop()
-        {
-            try
-            {
-                progressBar.Stop();
-            }
-            catch (Exception)
-            {
-                throw;
-            }           
         }
     }
 }

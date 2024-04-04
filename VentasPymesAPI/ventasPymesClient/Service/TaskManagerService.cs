@@ -4,26 +4,20 @@ using ventasPymesClient.Dto;
 namespace ventasPymesClient.Service
 {
     public class TaskManagerService
-    {         
+    {
+        ServerRestInfoToSaveDTO serverRestInfo;
         public TaskManagerService(ServerRestInfoToSaveDTO serverRestInfo) 
         {
-            VentasPymesClientMetadata.initMetadata(serverRestInfo);
+            this.serverRestInfo = serverRestInfo;            
         }
 
         public void EjecutarServidorApiRest()
         {
             try
             {
-                if (VentasPymesClientMetadata.serverRestInfo.checkApi && !isProcesoEnEjecucion(VentasPymesClientMetadata.nombreProceso))
+                if (serverRestInfo.checkApi && !isProcesoEnEjecucion(VentasPymesClientMetadata.nombreProceso) && System.IO.File.Exists(serverRestInfo.rutaBackend))
                 {
-                    if (System.IO.File.Exists(VentasPymesClientMetadata.serverRestInfo.rutaBackend))
-                    {
-                        Process.Start(VentasPymesClientMetadata.serverRestInfo.rutaBackend);
-                    }
-                    //else
-                    //{
-                    //    DialogService.ERROR(Message.TextMensaje.ABRIR_BACKEND_APP_ERROR);
-                    //}
+                    Process.Start(serverRestInfo.rutaBackend);
                 }
             }
             catch (Exception)

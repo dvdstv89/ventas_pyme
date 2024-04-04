@@ -26,7 +26,7 @@ namespace MyUI.UIControler
            var progressBarService = new ProgressBarService(TextMensaje.PROGRESSBAR_TESTING);
             try
             {
-                await progressBarService.start(() => mostrarProgress());
+                await progressBarService.run(() => mostrarProgress());
             }
             catch (Exception ex)
             {

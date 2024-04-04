@@ -53,14 +53,16 @@ namespace ExternalSystem.Fichero
             }
         }
 
-        public void GuardarFichero(Object datos)
+        public FileSaveResult GuardarFichero(Object datos)
         {           
             try
             {               
                 var binfor = new BinaryFormatter();
-                var file = System.IO.File.Open(path, FileMode.Create);
+                bool archivoExistente = ExisteFichero();
+                var file = System.IO.File.Open(path, archivoExistente ? FileMode.Append : FileMode.Create);
                 binfor.Serialize(file, datos);
                 file.Close();
+                return archivoExistente ? FileSaveResult.OVERRIDED : FileSaveResult.CREATED;
             }
             catch (Exception)
             {

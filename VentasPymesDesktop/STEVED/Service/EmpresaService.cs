@@ -1,11 +1,7 @@
 ﻿using ExternalSystem.Service;
 using NucleoEV.Model;
 using NucleoEV.UI;
-using NucleoEV.UIController;
-using System.Windows.Forms;
 using System;
-using NucleoEV.Message;
-using MyUI.Service;
 
 namespace NucleoEV.Service
 {
@@ -23,7 +19,7 @@ namespace NucleoEV.Service
             {
                
 
-                //abrir selector de empresa
+                //TODO: abrir selector de empresa
 
               
             }

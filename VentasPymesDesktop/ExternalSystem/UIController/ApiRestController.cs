@@ -9,17 +9,18 @@ using ventasPymesClient;
 using ventasPymesClient.Model;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using ExternalSystem.Fichero;
 
 namespace ExternalSystem.UIController
 {
     public class ApiRestController : BaseUIController<ApiRestUI>
     {
-        readonly ApiRestService apiRestService;        
-        public bool isValidado { get; set; }
+        readonly ApiRestService apiRestService;
+        public FileSaveResult ficheroCreado { get; set; }
         public ApiRestController(ApiRestService apiRestService, ApiRestUI apiRestUI) : base(apiRestUI)
         {
-            this.apiRestService = apiRestService;             
-            this.isValidado = false;         
+            this.apiRestService = apiRestService;
+            this.ficheroCreado = FileSaveResult.SKIP;
         }
         public ApiRestUI ejecutar()
         {
@@ -72,10 +73,9 @@ namespace ExternalSystem.UIController
             try
             {
                 capturarDatos(VentasPymesClientMetadata.serverRestInfo);
-                apiRestService.GuardarApiRest();
+                ficheroCreado = apiRestService.GuardarApiRest();
                 forma.Close();
                 forma.DialogResult = DialogResult.OK;
-
             }
             catch (Exception ex)
             {
@@ -85,11 +85,10 @@ namespace ExternalSystem.UIController
         public async void btnProbar_Click(object sender, EventArgs e)
         {
             try
-            {
-                this.isValidado = false;
+            {               
                 ServerRestInfoToSaveDTO prueba = new ServerRestInfoToSaveDTO();
                 capturarDatos(prueba);                  
-                forma.btGuardar.Enabled = await apiRestService.ProbarApiRest(prueba); ;
+                forma.btGuardar.Enabled = await apiRestService.ProbarApiRest(prueba);
                 DialogService.SUCCESS(Message.TextMensaje.API_REST_TEST_OK);
             }
             catch (Exception ex)
@@ -102,7 +101,7 @@ namespace ExternalSystem.UIController
         {
             try
             {
-                isValidado = false;
+                ficheroCreado = FileSaveResult.CANCEL;
                 forma.Close();
                 forma.DialogResult = DialogResult.Cancel;                
             }
