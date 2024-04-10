@@ -22,18 +22,13 @@ namespace ExternalSystem.UIController
             this.apiRestService = apiRestService;
             this.ficheroCreado = FileSaveResult.SKIP;
         }
-        public ApiRestUI ejecutar()
+        protected override ApiRestUI ejecutar()
         {
-            forma.Load += new EventHandler(forma_Load);
             forma.btCancelar.Click += new EventHandler(btnCancelar_Click);
             forma.btProbar.Click += new EventHandler(btnProbar_Click);
             forma.btGuardar.Click += new EventHandler(btnGuardar_Click);
-            return forma;
-        }
-        protected override void forma_Load(object sender, EventArgs e)
-        {
-            base.forma_Load(sender, e);
-        }
+            return base.ejecutar();
+        }       
         protected override void aplicarTema()
         {
             ButtonIconStyleFactory.GUARDAR(forma.btGuardar);
@@ -58,7 +53,7 @@ namespace ExternalSystem.UIController
 
             FormularioStyleFactory.WINDOWS_FORM(this.forma, Message.TextMensaje.API_REST_CONFIG);
         }
-        public override void initDataForm()
+        protected override void initDataForm()
         {            
             forma.btGuardar.Enabled= false;
             forma.tbToken.Text = VentasPymesClientMetadata.serverRestInfo.token;
@@ -97,18 +92,10 @@ namespace ExternalSystem.UIController
                 DialogService.EXCEPTION(ex.Message);
             }
         }
-        public new void btnCancelar_Click(object sender, EventArgs e)
+        protected override void btnCancelar_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ficheroCreado = FileSaveResult.CANCEL;
-                forma.Close();
-                forma.DialogResult = DialogResult.Cancel;                
-            }
-            catch (Exception ex)
-            {
-                DialogService.EXCEPTION(ex.Message);
-            }
+            ficheroCreado = FileSaveResult.CANCEL;
+            base.btnCancelar_Click(sender, e);            
         }
         private void capturarDatos(ServerRestInfoToSaveDTO apiRestDestino)
         {
@@ -125,6 +112,6 @@ namespace ExternalSystem.UIController
             {
                 throw;
             }           
-        }
+        }        
     }
 }

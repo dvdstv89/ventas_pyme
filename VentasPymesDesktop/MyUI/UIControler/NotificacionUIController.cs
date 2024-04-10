@@ -15,9 +15,8 @@ namespace MyUI.UIControler
         {
             this.notificacion = notificacion;
         }
-        public NotificationUI ejecutar()
-        {
-            forma.Load += new EventHandler(forma_Load);
+        protected override NotificationUI ejecutar()
+        {           
             forma.btnCancelar.Click += new EventHandler(btnCancelar_Click);
             forma.btnCancelarOculto.Click += new EventHandler(btnCancelar_Click);
             forma.btnAceptar.Click += new EventHandler(btnAceptar_Click);
@@ -27,7 +26,7 @@ namespace MyUI.UIControler
                 forma.Owner = Form.ActiveForm;
                 forma.Owner.Enabled = false;
             }          
-            return forma;
+            return base.ejecutar();
         }
         protected override void aplicarTema()
         {

@@ -7,7 +7,7 @@ namespace ExternalSystem.Service
 {
     public abstract class BaseService
     {
-        protected async Task<T> ejecutarEndpoint<T>(MensajeText mensajeText, Func<Task<T>> task)
+        protected async Task<T> ejecutarTaskAsync<T>(MensajeText mensajeText, Func<Task<T>> task)
         {
             try
             {

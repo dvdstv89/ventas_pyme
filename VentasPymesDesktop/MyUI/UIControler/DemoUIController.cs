@@ -1,24 +1,23 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using MyUI.Enum.Message;
 using MyUI.Service;
 
 namespace MyUI.UIControler
 {  
-    internal class DemoUIController
-    {
-        private Form1 frm;       
-
-        public DemoUIController()
+    internal class DemoUIController : BaseUIController<Form1>
+    {   
+        public DemoUIController():base(new Form1())
         {           
-            frm = new Form1();            
+                   
         }
 
-        public Form1 ejecutar()
+        protected override Form1 ejecutar()
         {     
-            frm.iconButtonProgressBar.Click += new EventHandler(btnAceptar_Click);
-            return frm;
+            forma.iconButtonProgressBar.Click += new EventHandler(btnAceptar_Click);
+            return base.ejecutar();
         }
 
         public async void btnAceptar_Click(object sender, EventArgs e)
@@ -46,6 +45,12 @@ namespace MyUI.UIControler
             {                        
                 return Task.FromResult(false);
             }
+        }
+
+        public Form mostrarFormulario()
+        {
+            showDialog();
+            return null;
         }
     }
 }

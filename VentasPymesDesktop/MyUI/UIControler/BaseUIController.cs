@@ -30,29 +30,20 @@ namespace MyUI.UIControler
         {
             return;
         }
-        public virtual void initDataForm()
+        protected virtual void initDataForm()
         {
             return;
         }
-        protected void cerrarFormulario()
+        protected virtual Forma ejecutar()
         {
-            if (forma.Owner != null)
-            {
-                forma.Owner.Enabled = true;
-            }
-            forma.Close();
+            forma.Load += new EventHandler(forma_Load);
+            return forma;
         }
-        protected void configurarFormulario()
-        {
-            forma.TopLevel = false;
-            forma.FormBorderStyle = FormBorderStyle.None;
-            forma.Dock = DockStyle.Fill;
-            forma.BringToFront();
-        }
-        protected void btnCancelar_Click(object sender, EventArgs e)
+        protected virtual void btnCancelar_Click(object sender, EventArgs e)
         {
             try
             {
+                forma.Close();
                 forma.DialogResult = DialogResult.Cancel;
                 if (forma.Owner != null)
                 {
@@ -68,6 +59,42 @@ namespace MyUI.UIControler
         protected Forma getForma()
         {
             return forma;
-        }       
+        }
+        public void cerrarFormulario()
+        {
+            try
+            {
+                if (forma.Owner != null)
+                {
+                    forma.Owner.Enabled = true;
+                }
+                forma.Close();
+            }
+            catch (Exception)
+            {
+                throw;
+            }           
+        }
+        public void configurarFormularioComoPanel()
+        {
+            forma.TopLevel = false;
+            forma.FormBorderStyle = FormBorderStyle.None;
+            forma.Dock = DockStyle.Fill;
+            forma.BringToFront();
+        }
+        public Form getForm()
+        {
+            return forma;
+        }
+
+        public DialogResult showDialog()
+        {
+            return ejecutar().ShowDialog();
+        }
+        public void show()
+        {
+             ejecutar().Show();
+        }
+
     }
 }

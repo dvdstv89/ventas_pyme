@@ -6,23 +6,19 @@ using MyUI.UI;
 
 namespace MyUI.UIControler
 {  
-    internal class ProgressBarUIController
-    {
-        private ProgressBarUI frm;
+    internal class ProgressBarUIController : BaseUIController<ProgressBarUI>
+    {       
         private MensajeText mensaje;
 
-        public ProgressBarUIController(MensajeText mensaje)
+        public ProgressBarUIController(MensajeText mensaje):base(new ProgressBarUI())
         {
-            this.mensaje = mensaje;
-            frm = new ProgressBarUI();
-            SetEstiloForm();
+            this.mensaje = mensaje; 
         }
-
-        private void SetEstiloForm()
+        protected override void aplicarTema()
         {
-            FormularioStyleFactory.PROGRESS_BAR(frm, mensaje);
-            LabelStyleFactory.Label_TITLE_MENSAJE(frm.lbEstado, mensaje);
-            frm._progressBarCommand.Style = ProgressBarStyle.Marquee;
+            FormularioStyleFactory.PROGRESS_BAR(forma, mensaje);
+            LabelStyleFactory.Label_TITLE_MENSAJE(forma.lbEstado, mensaje);
+            forma._progressBarCommand.Style = ProgressBarStyle.Marquee;
         }
 
         public void Start()
@@ -31,31 +27,15 @@ namespace MyUI.UIControler
             {
                 if (Form.ActiveForm != null)
                 {
-                    frm.Owner = Form.ActiveForm;
-                    frm.Owner.Enabled = false;
+                    forma.Owner = Form.ActiveForm;
+                    forma.Owner.Enabled = false;
                 }
-                frm.Show();
+                show();
             }
             catch (Exception)
             {
                 throw;
             }           
-        }
-
-        public void Stop()
-        {
-            try
-            {
-                if (frm.Owner != null)
-                {
-                    frm.Owner.Enabled = true;
-                }
-                frm.Close();
-            }
-            catch (Exception)
-            {
-                throw;
-            }           
-        }
+        }          
     }
 }

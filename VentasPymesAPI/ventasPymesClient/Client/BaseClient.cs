@@ -2,7 +2,6 @@
 using System.Net;
 using System.Text;
 using ventasPymesClient.Dto;
-using ventasPymesClient.Model;
 
 namespace ventasPymesClient.Client
 {

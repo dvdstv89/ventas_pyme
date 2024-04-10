@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using ventasPymesClient.Dto;
-using ventasPymesClient.Model;
 
 namespace ventasPymesClient.Client
 {

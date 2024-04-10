@@ -87,11 +87,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Message\TextMensajeNucleo.cs" />
-    <Compile Include="Service\EmpresaService.cs" />
+    <Compile Include="Service\PymeService.cs" />
     <Compile Include="Service\AppService.cs" />
     <Compile Include="Service\MainUIService.cs" />
-    <Compile Include="UIController\BaseUIController.cs" />
-    <Compile Include="UIController\IController.cs" />
+    <Compile Include="UIController\Pyme\SeleccionarPymeController.cs" />
     <Compile Include="UIController\MainUIController.cs" />
     <Compile Include="UI\08_CapitalHumano\GestionarCapitalHumanoUI.cs">
       <SubType>Form</SubType>
@@ -283,6 +282,12 @@
     <Compile Include="UI\04_Contabilidad\DetallesVentasResumidasTiendaUI.Designer.cs">
       <DependentUpon>DetallesVentasResumidasTiendaUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Pyme\SeleccionarPymeUI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Pyme\SeleccionarPymeUI.Designer.cs">
+      <DependentUpon>SeleccionarPymeUI.cs</DependentUpon>
+    </Compile>
     <Compile Include="VariablesEntorno.cs" />
     <EmbeddedResource Include="UI\08_CapitalHumano\GestionarCapitalHumanoUI.resx">
       <DependentUpon>GestionarCapitalHumanoUI.cs</DependentUpon>
@@ -386,6 +391,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\04_Contabilidad\DetallesVentasResumidasTiendaUI.resx">
       <DependentUpon>DetallesVentasResumidasTiendaUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Pyme\SeleccionarPymeUI.resx">
+      <DependentUpon>SeleccionarPymeUI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />

@@ -1,6 +1,4 @@
-﻿using ventasPymesClient.Model;
-
-namespace ventasPymesClient.Dto
+﻿namespace ventasPymesClient.Dto
 {
     [Serializable]
     public class ServerRestInfoToSaveDTO

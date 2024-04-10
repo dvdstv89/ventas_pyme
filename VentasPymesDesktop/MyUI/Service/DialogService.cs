@@ -13,7 +13,7 @@ namespace MyUI.Service
             var exceptionMessage = new MensajeException(exception);
             var notificacionUI = new NotificationUI();
             var controller = new NotificacionUIController(notificacionUI, exceptionMessage);
-            controller.ejecutar().ShowDialog();
+            controller.showDialog();
         }
 
         public static void ERROR(MensajeText mensaje)
@@ -23,7 +23,7 @@ namespace MyUI.Service
                 var errorMessage = new MensajeError(mensaje);
                 var notificacionUI = new NotificationUI();
                 var controller = new NotificacionUIController(notificacionUI, errorMessage);
-                controller.ejecutar().ShowDialog();
+                controller.showDialog();
             }
             catch (Exception ex)
             {
@@ -38,7 +38,7 @@ namespace MyUI.Service
                 var successMessage = new MensajeSuccess(mensaje);
                 var notificacionUI = new NotificationUI();
                 var controller = new NotificacionUIController(notificacionUI, successMessage);
-                controller.ejecutar().ShowDialog();
+                controller.showDialog();
             }
             catch (Exception ex)
             {
@@ -53,7 +53,7 @@ namespace MyUI.Service
                 var confirmationMessage = new MensajeConfirmation(mensaje);
                 var notificacionUI = new NotificationUI();
                 var controller = new NotificacionUIController(notificacionUI, confirmationMessage);
-                DialogResult dialogResult = controller.ejecutar().ShowDialog();
+                DialogResult dialogResult = controller.showDialog();
                 return dialogResult == DialogResult.OK ? true : false;
             }
             catch (Exception ex)

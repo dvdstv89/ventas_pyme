@@ -21,7 +21,8 @@ namespace ExternalSystem.LocalService
             {
                 var apiRestUI = new ApiRestUI();
                 var apiRestController = new ApiRestController(apiRestService, apiRestUI);
-                return apiRestController.ejecutar();
+                apiRestController.showDialog();
+                return null;
             }
             catch (Exception)
             {

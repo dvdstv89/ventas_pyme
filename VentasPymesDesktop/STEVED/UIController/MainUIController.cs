@@ -1,5 +1,4 @@
-﻿using NucleoEV.Model;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System;
 using NucleoEV.UI;
 using System.Drawing;
@@ -7,12 +6,14 @@ using MyUI.Factories;
 using NucleoEV.Message;
 using MyUI.UIControler;
 using NucleoEV.Service;
+using NucleoEV.UIController.Pyme;
 
 namespace NucleoEV.UIController
 {
-    internal class MainUIController : BaseUIController<MainUI>
+    internal class MainUIController : BaseUIController<MainUI>, IForm
     {
-        MainUIService mainUIService;
+        private readonly MainUIService mainUIService;
+        private readonly PymeService pymeService;
 
         private const int imagen_inicio = 6;
         private const int imagen_tienda = 9;
@@ -25,23 +26,23 @@ namespace NucleoEV.UIController
         private const int imagen_configuracion = 8;
         private const int imagen_informacion = 2;
 
-      
-        
-        object activeForm = null;        
+
+
+        IForm activeForm = null;        
         Button botonActivo=null;
         bool aplicacionEstaAbierta=false;
         public bool reiniciarAplicacionPorModificacionEnToken { get; set; }
 
 
-        public MainUIController(MainUIService mainUIService, MainUI mainUI) : base(mainUI)
+        public MainUIController(MainUIService mainUIService) : base(new MainUI())
         {
             this.mainUIService = mainUIService;
             reiniciarAplicacionPorModificacionEnToken = false;
+            this.pymeService = new PymeService();
         }  
         
-        public MainUI Ejecutar()
-        {
-            forma.Load += new EventHandler(forma_Load);         
+        protected override MainUI ejecutar()
+        {                  
             forma.btnUsuario.Click += new EventHandler(btnUsuario_Click);
             forma.btnInicio.Click += new EventHandler(btnInicio_Click);
             forma.btnTiendas.Click += new EventHandler(btnTiendas_Click);  
@@ -55,13 +56,13 @@ namespace NucleoEV.UIController
             forma.btnInformacion.Click += new EventHandler(btnInformacion_Click);
             forma.btnMinimizarMenu.Click += new EventHandler(btnMinimizarMenu_Click);
             forma.btnMaximizarMenu.Click += new EventHandler(btnMaximizarMenu_Click);
-
-            return forma;
+            return base.ejecutar();
         }
         protected override void forma_Load(object sender, EventArgs e)
         {
             try
-            {
+            {               
+
                 if (mainUIService.session.tokenEsAutentico)
                 {
                     //this.empresa = session.empresa;
@@ -81,7 +82,10 @@ namespace NucleoEV.UIController
                 {  
                     //solicitar token
                     btnUsuario_Click(sender, e);
-                }               
+                }
+
+                if (!pymeService.empresaSeleccionada)
+                    cerrarAplicacion();
             }
             catch (Exception ex)
             {
@@ -137,16 +141,30 @@ namespace NucleoEV.UIController
         {          
             forma.lbHeaderTitle.Text = "";
             visualizarFuncionalidadesPorPermisos();            
-        }      
-        private void OpenChildForm(object baseUIController)
+        }
+
+        public void MostrarSelectorPyme()
+        {
+            try
+            {
+                var sellecionarPymeController = new SeleccionarPymeController(pymeService, new UI.Pyme.SeleccionarPymeUI());
+                sellecionarPymeController.showDialog();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void OpenChildForm(IForm baseUIController)
         {
             if (activeForm != null)
             {
-                (activeForm as BaseUIController).cerrarFormulario();
+                activeForm.cerrarFormulario();
             }
             activeForm = baseUIController;
-            (baseUIController as BaseUIController).configurarFormulario();
-            Form form = ((baseUIController as BaseUIController).forma) as Form;
+            baseUIController.configurarFormularioComoPanel();
+            Form form = baseUIController.getForm();
             forma.panelParent.Controls.Add(form);
             forma.panelParent.Tag = form;
         }

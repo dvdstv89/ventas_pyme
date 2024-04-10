@@ -17,7 +17,7 @@ namespace MyUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DemoUIController().ejecutar());
+            Application.Run(new DemoUIController().mostrarFormulario());
         }
     }
 }

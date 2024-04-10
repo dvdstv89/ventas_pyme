@@ -6,7 +6,6 @@ using System.Globalization;
 using System.Threading.Tasks;
 using MyUI.Service;
 using NucleoEV.UIController;
-using NucleoEV.UI;
 using ExternalSystem.Fichero;
 
 namespace NucleoEV.Service
@@ -15,54 +14,52 @@ namespace NucleoEV.Service
     {
         internal FileSaveResult ficheroStatus { get; set; }
         Session session;       
-        readonly ExternalSystemService externalSystem;
-        readonly EmpresaService empresaService;
+        readonly ExternalSystemService externalSystemService;       
         readonly MainUIService mainUIService;
-        readonly MainUIController mainUIController;
-        private readonly MainUI mainUI;
+        readonly MainUIController mainUIController;        
 
         public AppService(CultureInfo cultureInfo)
         {
-            ficheroStatus = FileSaveResult.SKIP;
+           ficheroStatus = FileSaveResult.CANCEL;
            this.session = new Session(cultureInfo);
-           this.externalSystem = new ExternalSystemService();              
-           this.empresaService = new EmpresaService();
-
-           this.mainUI = new MainUI();
+           this.externalSystemService = new ExternalSystemService();          
            this.mainUIService = new MainUIService(session);
-           this.mainUIController = new MainUIController(mainUIService, mainUI);
+           this.mainUIController = new MainUIController(mainUIService);
         }
 
         public Form ejecutarApp()
         {
-            _ = ejecutarAppAsync().ConfigureAwait(false);
+            _ = ejecutarAppAsync().ConfigureAwait(true);          
             return null;
         }
 
         private async Task ejecutarAppAsync()
         {
             try
-            {
-                ficheroStatus = await externalSystem.verificarFicheroConfiguracionAsync();               
-
-                bool conexionEstablecida = await externalSystem.probarServicioRestAsync();
+            { 
+                ficheroStatus = await externalSystemService.verificarFicheroConfiguracionAsync();
+                if (ficheroStatus == FileSaveResult.CANCEL)
+                {
+                    return;
+                }
+                bool conexionEstablecida =  await externalSystemService.probarServicioRestAsync();
                 if (!conexionEstablecida && ficheroStatus != FileSaveResult.CANCEL)
                 {
-                    conexionEstablecida = (await externalSystem.TryRepairConexionAsync() == FileSaveResult.OVERRIDED) ? true : false;
+                    conexionEstablecida = (await externalSystemService.TryRepairConexionAsync() == FileSaveResult.OVERRIDED) ? true : false;
                 }
                 if (conexionEstablecida)
-                {
-                    empresaService.buscarEmpresa();
-                    mainUIController.Ejecutar().ShowDialog();
+                {                    
+                    mainUIController.MostrarSelectorPyme();
+                    mainUIController.showDialog();
                 }
-            }
+            }           
             catch (Exception ex)
             {
                 DialogService.EXCEPTION(ex.Message);               
             }
             finally
-            {
-                Application.Exit();
+            {               
+                Environment.Exit(0);
             }
         }      
     }

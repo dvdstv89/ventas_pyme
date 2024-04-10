@@ -45,7 +45,7 @@ namespace MyUI.Service
 
                 worker.RunWorkerCompleted += (sender, e) =>
                 {
-                    progressBar.Stop();
+                    progressBar.cerrarFormulario();
                 };
 
                 worker.RunWorkerAsync();

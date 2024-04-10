@@ -21,10 +21,10 @@ namespace ExternalSystem.Service
         internal async Task<bool> ProbarApiRest(ServerRestInfoToSaveDTO apiRestToTest)
         {            
             try
-            {      
+            {                 
                 new TaskManagerService(apiRestToTest).EjecutarServidorApiRest();
                 var statusService = new StatusService(apiRestToTest);
-                return await ejecutarEndpoint<bool>(MyUI.Enum.Message.TextMensaje.CHECK_CONEXION, () => statusService.getStatusAsync());
+                return await ejecutarTaskAsync<bool>(MyUI.Enum.Message.TextMensaje.CHECK_CONEXION, () => statusService.getStatusAsync());
             }
             catch (Exception) { throw; }
         } 

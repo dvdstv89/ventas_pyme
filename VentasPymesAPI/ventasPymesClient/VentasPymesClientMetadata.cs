@@ -1,10 +1,10 @@
 ﻿using ventasPymesClient.Dto;
-using ventasPymesClient.Model;
 
 namespace ventasPymesClient
 {
     public static class VentasPymesClientMetadata
     {
+        public static string tokenProduccion = "1234";
         public static ServerRestInfoToSaveDTO serverRestInfo;
         public static readonly string nombreProceso = "ventasPymes.api";        
         internal static ServerRest serverRest = null;        

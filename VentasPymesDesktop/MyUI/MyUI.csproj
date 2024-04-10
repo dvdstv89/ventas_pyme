@@ -120,6 +120,7 @@
     <Compile Include="Service\DialogService.cs" />
     <Compile Include="Component\DataTimePickerComponent.cs" />
     <Compile Include="UIControler\BaseUIController.cs" />
+    <Compile Include="UIControler\IForm.cs" />
     <Compile Include="UIControler\NotificacionUIController.cs" />
     <Compile Include="UIControler\DemoUIController.cs" />
     <Compile Include="UIControler\ProgressBarUIController.cs" />
