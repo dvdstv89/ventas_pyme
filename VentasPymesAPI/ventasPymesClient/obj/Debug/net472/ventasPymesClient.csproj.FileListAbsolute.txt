@@ -1,10 +1,3 @@
-D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.csproj.AssemblyReference.cache
-D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.Properties.Resources.resources
-D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.csproj.GenerateResource.cache
-D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.GeneratedMSBuildEditorConfig.editorconfig
-D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.AssemblyInfoInputs.cache
-D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.AssemblyInfo.cs
-D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.csproj.CoreCompileInputs.cache
 D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net472\ventasPymesClient.dll
 D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net472\ventasPymesClient.pdb
 D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net472\Microsoft.Bcl.AsyncInterfaces.dll
@@ -18,6 +11,13 @@ D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net472\System.Tex
 D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net472\System.Text.Json.dll
 D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net472\System.Threading.Tasks.Extensions.dll
 D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\bin\Debug\net472\System.ValueTuple.dll
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.csproj.AssemblyReference.cache
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.Properties.Resources.resources
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.csproj.GenerateResource.cache
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.AssemblyInfoInputs.cache
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.AssemblyInfo.cs
+D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.csproj.CoreCompileInputs.cache
 D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.csproj.CopyComplete
 D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.dll
 D:\Pyme\ventas_pyme\VentasPymesAPI\ventasPymesClient\obj\Debug\net472\ventasPymesClient.pdb

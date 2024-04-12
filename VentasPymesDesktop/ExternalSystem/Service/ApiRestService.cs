@@ -33,9 +33,19 @@ namespace ExternalSystem.Service
         {
             try
             {
-                return ficheroService.GuardarFichero(VentasPymesClientMetadata.serverRestInfo);
+                return ficheroService.GuardarFichero(VentasPymesClientMetadata.serverRestInfo);                
             }
             catch (Exception) { throw; }
-        }       
+        }
+
+        internal async Task<bool> UpdateSecurityToken()
+        {
+            try
+            {                
+                var securityTokenService = new SecurityTokenService();
+                return await ejecutarTaskAsync<bool>(MyUI.Enum.Message.TextMensaje.SAVE_SEETINGS, () => securityTokenService.UpdateSecurityTokenFunctionalitiesByTokenSelectedAsync());                           
+            }
+            catch (Exception) { throw; }
+        }
     }
 }

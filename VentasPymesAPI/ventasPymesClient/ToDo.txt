@@ -1,0 +1,6 @@
+﻿
+Crear modelo de datos
+Crear script de creacion de la base de datos y la carga inicial de datos
+Configurar nomencladores
+Obtener funcionalidades de un token y setearlo al VentasPymesClientMetadata.securityToken (UpdateSecurityTokenFunctionalitiesByTokenSelectedAsync() en SecurityTokenService)
+

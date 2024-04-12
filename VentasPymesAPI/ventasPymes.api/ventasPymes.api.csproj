@@ -7,13 +7,37 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Compile Remove="Model\Enums\EstadoProduccion.cs" />
+    <Compile Remove="Model\Enums\EstadoRegistroFinanciero.cs" />
+    <Compile Remove="Model\Enums\TipoActorNegocio.cs" />
+    <Compile Remove="Model\Enums\TipoAlmacen.cs" />
+    <Compile Remove="Model\Enums\TipoDesgloceFinanciero.cs" />
+    <Compile Remove="Model\Enums\TipoLog.cs" />
+    <Compile Remove="Model\Enums\TipoMoneda.cs" />
+    <Compile Remove="Model\Enums\TipoMovimientoMercancia.cs" />
+    <Compile Remove="Model\Enums\TipoPago.cs" />
+    <Compile Remove="Model\Enums\TipoProduccion.cs" />
+    <Compile Remove="Model\Enums\TipoRedondeo.cs" />
+    <Compile Remove="Model\Enums\TipoRegistroFinanciero.cs" />
+    <Compile Remove="Model\Enums\UnidadMedida.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Repositories\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.18" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.18">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Npgsql" Version="7.0.6" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
   </ItemGroup>
 

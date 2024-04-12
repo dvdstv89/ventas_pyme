@@ -8,22 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Model\Enums\EstadoProduccion.cs" />
-    <Compile Remove="Model\Enums\EstadoRegistroFinanciero.cs" />
-    <Compile Remove="Model\Enums\TipoActorNegocio.cs" />
-    <Compile Remove="Model\Enums\TipoAlmacen.cs" />
-    <Compile Remove="Model\Enums\TipoDesgloceFinanciero.cs" />
-    <Compile Remove="Model\Enums\TipoLog.cs" />
-    <Compile Remove="Model\Enums\TipoMoneda.cs" />
-    <Compile Remove="Model\Enums\TipoMovimientoMercancia.cs" />
-    <Compile Remove="Model\Enums\TipoPago.cs" />
-    <Compile Remove="Model\Enums\TipoProduccion.cs" />
-    <Compile Remove="Model\Enums\TipoRedondeo.cs" />
-    <Compile Remove="Model\Enums\TipoRegistroFinanciero.cs" />
-    <Compile Remove="Model\Enums\UnidadMedida.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
   </ItemGroup>

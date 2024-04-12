@@ -5,6 +5,7 @@ using ExternalSystem.UIController;
 using MyUI.Service;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using ventasPymesClient;
 
 namespace ExternalSystem.Service
@@ -33,8 +34,9 @@ namespace ExternalSystem.Service
         public async Task<bool> probarServicioRestAsync()
         {           
             try
-            {          
-                return await apiRestService.ProbarApiRest(ventasPymesClient.VentasPymesClientMetadata.serverRestInfo);
+            {
+                await apiRestService.ProbarApiRest(ventasPymesClient.VentasPymesClientMetadata.serverRestInfo);
+                return await apiRestService.UpdateSecurityToken();
 
             }
             catch (Exception)
@@ -60,7 +62,8 @@ namespace ExternalSystem.Service
             try
             {
                 var apiRestController = new ApiRestController(apiRestService, new ApiRestUI());
-                apiRestController.showDialog();
+                DialogResult dialogResult = apiRestController.showDialog();
+                //todo chek en caso de que de error UpdateSecurityTokenFunctionalitiesByTokenSelectedAsync al guardar los datos
                 return apiRestController.ficheroCreado;
             }
             catch (Exception)

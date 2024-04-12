@@ -48,7 +48,7 @@ namespace NucleoEV.Service
                     conexionEstablecida = (await externalSystemService.TryRepairConexionAsync() == FileSaveResult.OVERRIDED) ? true : false;
                 }
                 if (conexionEstablecida)
-                {                    
+                {    
                     mainUIController.MostrarSelectorPyme();
                     mainUIController.showDialog();
                 }

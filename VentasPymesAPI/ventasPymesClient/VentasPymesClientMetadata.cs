@@ -5,7 +5,8 @@ namespace ventasPymesClient
     public static class VentasPymesClientMetadata
     {
         public static string tokenProduccion = "1234";
-        public static ServerRestInfoToSaveDTO serverRestInfo;
+        public static SecurityTokenDTO securityToken = null;
+        public static ServerRestInfoToSaveDTO serverRestInfo = null;
         public static readonly string nombreProceso = "ventasPymes.api";        
         internal static ServerRest serverRest = null;        
         internal static bool isMetadataInicializada = false;
@@ -23,7 +24,8 @@ namespace ventasPymesClient
                 protocol = serverRestInfoToSaveDTO.protocol,
                 token = serverRestInfoToSaveDTO.token,                
             };
-            isMetadataInicializada= true;
-        }
+            securityToken = new SecurityTokenDTO(serverRest.token);
+            isMetadataInicializada = true;
+        }      
     }
 }

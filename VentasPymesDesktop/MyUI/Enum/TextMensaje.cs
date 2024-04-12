@@ -53,6 +53,7 @@ namespace MyUI.Enum.Message
         public static MensajeText TWO_POINTS = new MensajeText(":", ":");
 
         public static MensajeText CHECK_CONEXION = new MensajeText("Conectando con servidor API", "Connecting to API server");
+        public static MensajeText SAVE_SEETINGS = new MensajeText("Guardando datos de conexion del servidor API", "Saving API server Connection Data");
         public static MensajeText CHECK_ESTRUCTURA = new MensajeText("Revisando estructura de datos", "Reviewing data structure");
         public static MensajeText CHECK_DATOS_INICIALES = new MensajeText("Revisando datos iniciales", "Reviewing initial data");
         public static MensajeText CHECK_MODULOS = new MensajeText("Revisando versiones de los modulos", "Reviewing module versions");

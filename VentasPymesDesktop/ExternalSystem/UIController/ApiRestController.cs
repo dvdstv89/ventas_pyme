@@ -6,7 +6,6 @@ using MyUI.UIControler;
 using MyUI.Factories;
 using ventasPymesClient.Dto;
 using ventasPymesClient;
-using ventasPymesClient.Model;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using ExternalSystem.Fichero;
@@ -63,14 +62,15 @@ namespace ExternalSystem.UIController
             forma.cbProtocolo.Text = VentasPymesClientMetadata.serverRestInfo.protocol.ToString();
             forma.cbCheckApi.Checked = VentasPymesClientMetadata.serverRestInfo.checkApi;
         }
-        public void btnGuardar_Click(object sender, EventArgs e)
+        public async void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
                 capturarDatos(VentasPymesClientMetadata.serverRestInfo);
                 ficheroCreado = apiRestService.GuardarApiRest();
+                bool datosGuardados = await apiRestService.UpdateSecurityToken();                
                 forma.Close();
-                forma.DialogResult = DialogResult.OK;
+                forma.DialogResult = (datosGuardados) ? DialogResult.OK : DialogResult.No;
             }
             catch (Exception ex)
             {

@@ -6,22 +6,18 @@ namespace ventasPymesClient.Service
 {
     public class StatusService : BaseService
     {
-        private readonly StatusClient statusClient;      
-        public StatusService() 
-        {  
-            this.statusClient = new StatusClient();
-        }
+        private readonly StatusClient statusClient;    
+      
         public StatusService(ServerRestInfoToSaveDTO apiRestToTest)
         {
             this.statusClient = new StatusClient(apiRestToTest);
         }
 
-
         public async Task<bool> getStatusAsync()
         {
             try
             {
-                HttpWebRequest request = statusClient.enpointStatusServer();
+                HttpWebRequest request = statusClient.endPointStatusServer();
                 var json = await getJsonResponseFromGetEnpointAsync(request);  
                 return mappingFromJson<bool>(json);
             }
@@ -29,6 +25,6 @@ namespace ventasPymesClient.Service
             {
                 throw;
             }           
-        }
+        }       
     }
 }
